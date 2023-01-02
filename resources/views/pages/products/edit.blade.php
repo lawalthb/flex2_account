@@ -44,29 +44,205 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                         <!--[form-content-start]-->
                         @csrf
                         <div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="company_id">{{ __('companyId') }} <span class="text-danger">*</span></label>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="category">{{ __('category') }} <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-category-holder" class=" ">
+                                                <select required=""  id="ctrl-category" data-field="category" name="category"  placeholder="{{ __('selectAValue') }}"    class="form-select" >
+                                                <option value="">{{ __('selectAValue') }}</option>
+                                                <?php
+                                                    $options = $comp_model->category_option_list() ?? [];
+                                                    foreach($options as $option){
+                                                    $value = $option->value;
+                                                    $label = $option->label ?? $value;
+                                                    $selected = ( $value == $data['category'] ? 'selected' : null );
+                                                ?>
+                                                <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                                                <?php echo $label; ?>
+                                                </option>
+                                                <?php
+                                                    }
+                                                ?>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-company_id-holder" class=" ">
-                                            <select required=""  id="ctrl-company_id" data-field="company_id" name="company_id"  placeholder="{{ __('selectAValue') }}"    class="form-select" >
-                                            <option value="">{{ __('selectAValue') }}</option>
-                                            <?php
-                                                $options = $comp_model->company_id_option_list() ?? [];
-                                                foreach($options as $option){
-                                                $value = $option->value;
-                                                $label = $option->label ?? $value;
-                                                $selected = ( $value == $data['company_id'] ? 'selected' : null );
-                                            ?>
-                                            <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                            <?php echo $label; ?>
-                                            </option>
-                                            <?php
-                                                }
-                                            ?>
-                                            </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="name">{{ __('productName') }} <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-name-holder" class=" ">
+                                                <input id="ctrl-name" data-field="name"  value="<?php  echo $data['name']; ?>" type="text" placeholder="{{ __('enterProductName') }}"  required="" name="name"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="unit">{{ __('unit') }} </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-unit-holder" class=" ">
+                                                <select  id="ctrl-unit" data-field="unit" name="unit"  placeholder="{{ __('selectAValue') }}"    class="form-select" >
+                                                <option value="">{{ __('selectAValue') }}</option>
+                                                <?php
+                                                    $options = $comp_model->unit_option_list() ?? [];
+                                                    foreach($options as $option){
+                                                    $value = $option->value;
+                                                    $label = $option->label ?? $value;
+                                                    $selected = ( $value == $data['unit'] ? 'selected' : null );
+                                                ?>
+                                                <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                                                <?php echo $label; ?>
+                                                </option>
+                                                <?php
+                                                    }
+                                                ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="qty">{{ __('qty') }} <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-qty-holder" class=" ">
+                                                <input id="ctrl-qty" data-field="qty"  value="<?php  echo $data['qty']; ?>" type="number" placeholder="{{ __('enterQty') }}" step="0.1"  required="" name="qty"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="selling_price">{{ __('sellingPrice') }} <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-selling_price-holder" class=" ">
+                                                <input id="ctrl-selling_price" data-field="selling_price"  value="<?php  echo $data['selling_price']; ?>" type="number" placeholder="{{ __('enterSellingPrice') }}" step="0.1"  required="" name="selling_price"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="purchase_price">{{ __('purchasePrice') }} <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-purchase_price-holder" class=" ">
+                                                <input id="ctrl-purchase_price" data-field="purchase_price"  value="<?php  echo $data['purchase_price']; ?>" type="number" placeholder="{{ __('enterPurchasePrice') }}" step="0.1"  required="" name="purchase_price"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="dead_stock">{{ __('deadStock') }} <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-dead_stock-holder" class=" ">
+                                                <?php
+                                                    $options = Menu::is_active();
+                                                    $field_value = $data['dead_stock'];
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if value is among checked options
+                                                    $checked = Html::get_record_checked($field_value, $value);
+                                                ?>
+                                                <label class="option-btn">
+                                                <input class="btn-check" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio" required=""   name="dead_stock" />
+                                                <span class="btn btn-outline-secondary"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="is_active">{{ __('isActive') }} <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-is_active-holder" class=" ">
+                                                <?php
+                                                    $options = Menu::is_active();
+                                                    $field_value = $data['is_active'];
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if value is among checked options
+                                                    $checked = Html::get_record_checked($field_value, $value);
+                                                ?>
+                                                <label class="option-btn">
+                                                <input class="btn-check" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio" required=""   name="is_active" />
+                                                <span class="btn btn-outline-secondary"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input id="ctrl-user_id" data-field="user_id"  value="<?php  echo $data['user_id']; ?>" type="hidden" placeholder="{{ __('enterUserId') }}" list="user_id_list"  required="" name="user_id"  class="form-control " />
+                            <datalist id="user_id_list">
+                            <?php
+                                $options = $comp_model->user_id_option_list() ?? [];
+                                foreach($options as $option){
+                                $value = $option->value;
+                                $label = $option->label ?? $value;
+                            ?>
+                            <option value="<?php echo $value; ?>"><?php echo $label; ?></option>
+                            <?php
+                                }
+                            ?>
+                            </datalist>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="exp_date">{{ __('expDate') }} </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-exp_date-holder" class="input-group ">
+                                                <input id="ctrl-exp_date" data-field="exp_date" class="form-control datepicker  datepicker"  value="<?php  echo $data['exp_date']; ?>" type="datetime" name="exp_date" placeholder="{{ __('enterExpDate') }}" data-enable-time="false" data-min-date="" data-max-date="" data-date-format="Y-m-d" data-alt-format="F j, Y" data-inline="false" data-no-calendar="false" data-mode="single" />
+                                                <span class="input-group-text"><i class="material-icons">date_range</i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="mfg_date">{{ __('mfgDate') }} </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-mfg_date-holder" class="input-group ">
+                                                <input id="ctrl-mfg_date" data-field="mfg_date" class="form-control datepicker  datepicker"  value="<?php  echo $data['mfg_date']; ?>" type="datetime" name="mfg_date" placeholder="{{ __('enterMfgDate') }}" data-enable-time="false" data-min-date="" data-max-date="" data-date-format="Y-m-d" data-alt-format="F j, Y" data-inline="false" data-no-calendar="false" data-mode="single" />
+                                                <span class="input-group-text"><i class="material-icons">date_range</i></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -74,46 +250,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="control-label" for="name">{{ __('name') }} <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-name-holder" class=" ">
-                                            <input id="ctrl-name" data-field="name"  value="<?php  echo $data['name']; ?>" type="text" placeholder="{{ __('enterName') }}"  required="" name="name"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="category">{{ __('category') }} <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-category-holder" class=" ">
-                                            <select required=""  id="ctrl-category" data-field="category" name="category"  placeholder="{{ __('selectAValue') }}"    class="form-select" >
-                                            <option value="">{{ __('selectAValue') }}</option>
-                                            <?php
-                                                $options = $comp_model->category_option_list() ?? [];
-                                                foreach($options as $option){
-                                                $value = $option->value;
-                                                $label = $option->label ?? $value;
-                                                $selected = ( $value == $data['category'] ? 'selected' : null );
-                                            ?>
-                                            <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                            <?php echo $label; ?>
-                                            </option>
-                                            <?php
-                                                }
-                                            ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="image">{{ __('image') }} </label>
+                                        <label class="control-label" for="image">{{ __('productImage') }} </label>
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-image-holder" class=" ">
@@ -124,146 +261,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             </div>
                                         </div>
                                         <?php Html :: uploaded_files_list($data['image'], '#ctrl-image'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="mfg_date">{{ __('mfgDate') }} </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-mfg_date-holder" class="input-group ">
-                                            <input id="ctrl-mfg_date" data-field="mfg_date" class="form-control datepicker  datepicker"  value="<?php  echo $data['mfg_date']; ?>" type="datetime" name="mfg_date" placeholder="{{ __('enterMfgDate') }}" data-enable-time="false" data-min-date="" data-max-date="" data-date-format="Y-m-d" data-alt-format="F j, Y" data-inline="false" data-no-calendar="false" data-mode="single" />
-                                            <span class="input-group-text"><i class="material-icons">date_range</i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="exp_date">{{ __('expDate') }} </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-exp_date-holder" class="input-group ">
-                                            <input id="ctrl-exp_date" data-field="exp_date" class="form-control datepicker  datepicker"  value="<?php  echo $data['exp_date']; ?>" type="datetime" name="exp_date" placeholder="{{ __('enterExpDate') }}" data-enable-time="false" data-min-date="" data-max-date="" data-date-format="Y-m-d" data-alt-format="F j, Y" data-inline="false" data-no-calendar="false" data-mode="single" />
-                                            <span class="input-group-text"><i class="material-icons">date_range</i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="qty">{{ __('qty') }} <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-qty-holder" class=" ">
-                                            <input id="ctrl-qty" data-field="qty"  value="<?php  echo $data['qty']; ?>" type="number" placeholder="{{ __('enterQty') }}" step="0.1"  required="" name="qty"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="selling_price">{{ __('sellingPrice') }} <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-selling_price-holder" class=" ">
-                                            <input id="ctrl-selling_price" data-field="selling_price"  value="<?php  echo $data['selling_price']; ?>" type="number" placeholder="{{ __('enterSellingPrice') }}" step="0.1"  required="" name="selling_price"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="purchase_price">{{ __('purchasePrice') }} <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-purchase_price-holder" class=" ">
-                                            <input id="ctrl-purchase_price" data-field="purchase_price"  value="<?php  echo $data['purchase_price']; ?>" type="number" placeholder="{{ __('enterPurchasePrice') }}" step="0.1"  required="" name="purchase_price"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="dead_stock">{{ __('deadStock') }} <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-dead_stock-holder" class=" ">
-                                            <input id="ctrl-dead_stock" data-field="dead_stock"  value="<?php  echo $data['dead_stock']; ?>" type="number" placeholder="{{ __('enterDeadStock') }}" step="any"  required="" name="dead_stock"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="is_active">{{ __('isActive') }} <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-is_active-holder" class=" ">
-                                            <input id="ctrl-is_active" data-field="is_active"  value="<?php  echo $data['is_active']; ?>" type="text" placeholder="{{ __('enterIsActive') }}"  required="" name="is_active"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="user_id">{{ __('userId') }} <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-user_id-holder" class=" ">
-                                            <select required=""  id="ctrl-user_id" data-field="user_id" name="user_id"  placeholder="{{ __('selectAValue') }}"    class="form-select" >
-                                            <option value="">{{ __('selectAValue') }}</option>
-                                            <?php
-                                                $options = $comp_model->user_id_option_list() ?? [];
-                                                foreach($options as $option){
-                                                $value = $option->value;
-                                                $label = $option->label ?? $value;
-                                                $selected = ( $value == $data['user_id'] ? 'selected' : null );
-                                            ?>
-                                            <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                            <?php echo $label; ?>
-                                            </option>
-                                            <?php
-                                                }
-                                            ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="unit">{{ __('unit') }} </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-unit-holder" class=" ">
-                                            <select  id="ctrl-unit" data-field="unit" name="unit"  placeholder="{{ __('selectAValue') }}"    class="form-select" >
-                                            <option value="">{{ __('selectAValue') }}</option>
-                                            <?php
-                                                $options = $comp_model->unit_option_list() ?? [];
-                                                foreach($options as $option){
-                                                $value = $option->value;
-                                                $label = $option->label ?? $value;
-                                                $selected = ( $value == $data['unit'] ? 'selected' : null );
-                                            ?>
-                                            <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                            <?php echo $label; ?>
-                                            </option>
-                                            <?php
-                                                }
-                                            ?>
-                                            </select>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

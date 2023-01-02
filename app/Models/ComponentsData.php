@@ -13,6 +13,21 @@ class ComponentsData{
 	
 
 	/**
+     * Check if value already exist in Companies table
+	 * @param string $value
+     * @return bool
+     */
+	function companies_name_value_exist(Request $request){
+		$value = trim($request->value);
+		$exist = DB::table('companies')->where('name', $value)->value('name');   
+		if($exist){
+			return true;
+		}
+		return false;
+	}
+	
+
+	/**
      * doc_type_option_list Model Action
      * @return array
      */
@@ -113,8 +128,9 @@ class ComponentsData{
      * @return array
      */
 	function category_option_list(){
-		$sqltext = "SELECT id as value, name as label FROM product_categories";
+		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM product_categories WHERE company_id=:comID" ;
 		$query_params = [];
+$query_params['comID'] = auth()->user()->company_id;
 		$arr = DB::select(DB::raw($sqltext), $query_params);
 		return $arr;
 	}

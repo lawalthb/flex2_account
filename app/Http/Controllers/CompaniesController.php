@@ -92,9 +92,33 @@ class CompaniesController extends Controller
 			$modeldata['signature'] = $fileInfo['filepath'];
 		}
 		
+		//Validate Users form data
+		$usersPostData = $request->users;
+		$usersValidator = validator()->make($usersPostData, ["lastname" => "nullable|string",
+				"firstname" => "required|string",
+				"email" => "required|email|unique:users,email",
+				"username" => "required|string|unique:users,username",
+				"phone" => "nullable|string",
+				"photo" => "nullable"]);
+		if ($usersValidator->fails()) {
+			return $usersValidator->errors();
+		}
+		$usersModeldata = $this->normalizeFormData($usersValidator->valid());
+
+		if( array_key_exists("photo", $usersModeldata) ){
+			//move uploaded file from temp directory to destination directory
+			$fileInfo = $this->moveUploadedFiles($usersModeldata['photo'], "photo");
+			 $usersModeldata['photo'] = $fileInfo['filepath'];
+		}
+		
 		//save Companies record
 		$record = Companies::create($modeldata);
 		$rec_id = $record->id;
+		
+        // set users.company_id to companies.id
+		$usersModeldata['company_id'] = $rec_id;
+		//save Users record
+		$usersRecord = \App\Models\Users::create($usersModeldata);
 		return $this->redirect("companies", __('recordAddedSuccessfully'));
 	}
 	

@@ -1,9 +1,10 @@
 <?php 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-class Users extends Authenticatable  
+class Users extends Authenticatable implements MustVerifyEmail 
 {
 	use Notifiable;
 	
@@ -22,7 +23,7 @@ class Users extends Authenticatable
      * @var string
      */
 	protected $primaryKey = 'id';
-	protected $fillable = ['email','password','photo','username','firstname','lastname','role_id','phone','user_type','is_active','company_id'];
+	protected $fillable = ['lastname','firstname','email','username','phone','photo','email_verified_at','company_id','role_id','user_type','is_active','password'];
 	public $timestamps = false;
 	
 
@@ -34,14 +35,23 @@ class Users extends Authenticatable
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				firstname LIKE ?  OR 
-				lastname LIKE ?  OR 
-				email LIKE ?  OR 
-				phone LIKE ?  OR 
-				username LIKE ? 
+				users.firstname LIKE ?  OR 
+				users.lastname LIKE ?  OR 
+				users.email LIKE ?  OR 
+				users.username LIKE ?  OR 
+				companies.name LIKE ?  OR 
+				companies.address LIKE ?  OR 
+				companies.logo LIKE ?  OR 
+				companies.website LIKE ?  OR 
+				companies.favicon LIKE ?  OR 
+				companies.com_email LIKE ?  OR 
+				companies.com_phone LIKE ?  OR 
+				companies.signature LIKE ?  OR 
+				companies.slogan LIKE ?  OR 
+				users.phone LIKE ? 
 		)';
 		$search_params = [
-			"%$text%","%$text%","%$text%","%$text%","%$text%"
+			"%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%"
 		];
 		//setting search conditions
 		$query->whereRaw($search_condition, $search_params);
@@ -55,18 +65,14 @@ class Users extends Authenticatable
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"firstname",
-			"lastname",
-			"email",
-			"role_id",
-			"phone",
-			"photo",
-			"user_type",
-			"date_join",
-			"is_active",
-			"company_id",
-			"username" 
+			"users.id AS id",
+			"users.firstname AS firstname",
+			"users.lastname AS lastname",
+			"users.email AS email",
+			"users.username AS username",
+			"users.role_id AS role_id",
+			"companies.name AS companies_name",
+			"companies.id AS companies_id" 
 		];
 	}
 	
@@ -78,18 +84,14 @@ class Users extends Authenticatable
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"firstname",
-			"lastname",
-			"email",
-			"role_id",
-			"phone",
-			"photo",
-			"user_type",
-			"date_join",
-			"is_active",
-			"company_id",
-			"username" 
+			"users.id AS id",
+			"users.firstname AS firstname",
+			"users.lastname AS lastname",
+			"users.email AS email",
+			"users.username AS username",
+			"users.role_id AS role_id",
+			"companies.name AS companies_name",
+			"companies.id AS companies_id" 
 		];
 	}
 	
@@ -101,17 +103,28 @@ class Users extends Authenticatable
      */
 	public static function viewFields(){
 		return [ 
-			"id",
-			"firstname",
-			"lastname",
-			"email",
-			"role_id",
-			"phone",
-			"user_type",
-			"date_join",
-			"is_active",
-			"company_id",
-			"username" 
+			"users.id AS id",
+			"users.firstname AS firstname",
+			"users.lastname AS lastname",
+			"users.email AS email",
+			"users.role_id AS role_id",
+			"users.phone AS phone",
+			"users.user_type AS user_type",
+			"users.date_join AS date_join",
+			"users.is_active AS is_active",
+			"users.company_id AS company_id",
+			"users.username AS username",
+			"users.email_verified_at AS email_verified_at",
+			"companies.id AS companies_id",
+			"companies.name AS companies_name",
+			"companies.address AS companies_address",
+			"companies.logo AS companies_logo",
+			"companies.website AS companies_website",
+			"companies.favicon AS companies_favicon",
+			"companies.com_email AS companies_com_email",
+			"companies.com_phone AS companies_com_phone",
+			"companies.signature AS companies_signature",
+			"companies.slogan AS companies_slogan" 
 		];
 	}
 	
@@ -123,17 +136,28 @@ class Users extends Authenticatable
      */
 	public static function exportViewFields(){
 		return [ 
-			"id",
-			"firstname",
-			"lastname",
-			"email",
-			"role_id",
-			"phone",
-			"user_type",
-			"date_join",
-			"is_active",
-			"company_id",
-			"username" 
+			"users.id AS id",
+			"users.firstname AS firstname",
+			"users.lastname AS lastname",
+			"users.email AS email",
+			"users.role_id AS role_id",
+			"users.phone AS phone",
+			"users.user_type AS user_type",
+			"users.date_join AS date_join",
+			"users.is_active AS is_active",
+			"users.company_id AS company_id",
+			"users.username AS username",
+			"users.email_verified_at AS email_verified_at",
+			"companies.id AS companies_id",
+			"companies.name AS companies_name",
+			"companies.address AS companies_address",
+			"companies.logo AS companies_logo",
+			"companies.website AS companies_website",
+			"companies.favicon AS companies_favicon",
+			"companies.com_email AS companies_com_email",
+			"companies.com_phone AS companies_com_phone",
+			"companies.signature AS companies_signature",
+			"companies.slogan AS companies_slogan" 
 		];
 	}
 	
@@ -145,7 +169,6 @@ class Users extends Authenticatable
      */
 	public static function accounteditFields(){
 		return [ 
-			"id",
 			"firstname",
 			"lastname",
 			"role_id",
@@ -154,7 +177,9 @@ class Users extends Authenticatable
 			"user_type",
 			"is_active",
 			"company_id",
-			"username" 
+			"username",
+			"email_verified_at",
+			"id" 
 		];
 	}
 	
@@ -166,17 +191,18 @@ class Users extends Authenticatable
      */
 	public static function accountviewFields(){
 		return [ 
-			"id",
-			"firstname",
-			"lastname",
-			"email",
-			"role_id",
-			"phone",
-			"user_type",
-			"date_join",
-			"is_active",
-			"company_id",
-			"username" 
+			"users.id AS id",
+			"users.firstname AS firstname",
+			"users.lastname AS lastname",
+			"users.email AS email",
+			"users.role_id AS role_id",
+			"users.phone AS phone",
+			"users.user_type AS user_type",
+			"users.date_join AS date_join",
+			"users.is_active AS is_active",
+			"users.company_id AS company_id",
+			"companies.name AS companies_name",
+			"users.username AS username" 
 		];
 	}
 	
@@ -188,17 +214,18 @@ class Users extends Authenticatable
      */
 	public static function exportAccountviewFields(){
 		return [ 
-			"id",
-			"firstname",
-			"lastname",
-			"email",
-			"role_id",
-			"phone",
-			"user_type",
-			"date_join",
-			"is_active",
-			"company_id",
-			"username" 
+			"users.id AS id",
+			"users.firstname AS firstname",
+			"users.lastname AS lastname",
+			"users.email AS email",
+			"users.role_id AS role_id",
+			"users.phone AS phone",
+			"users.user_type AS user_type",
+			"users.date_join AS date_join",
+			"users.is_active AS is_active",
+			"users.company_id AS company_id",
+			"companies.name AS companies_name",
+			"users.username AS username" 
 		];
 	}
 	
@@ -210,16 +237,53 @@ class Users extends Authenticatable
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"firstname",
 			"lastname",
+			"username",
 			"role_id",
 			"phone",
 			"photo",
 			"user_type",
 			"is_active",
 			"company_id",
-			"username" 
+			"email_verified_at",
+			"id" 
+		];
+	}
+	
+
+	/**
+     * return usersincomp page fields of the model.
+     * 
+     * @return array
+     */
+	public static function usersincompFields(){
+		return [ 
+			"users.firstname AS firstname",
+			"users.lastname AS lastname",
+			"users.email AS email",
+			"users.role_id AS role_id",
+			"users.username AS username",
+			"users.id AS id",
+			"companies.id AS companies_id" 
+		];
+	}
+	
+
+	/**
+     * return exportUsersincomp page fields of the model.
+     * 
+     * @return array
+     */
+	public static function exportUsersincompFields(){
+		return [ 
+			"users.firstname AS firstname",
+			"users.lastname AS lastname",
+			"users.email AS email",
+			"users.role_id AS role_id",
+			"users.username AS username",
+			"users.id AS id",
+			"companies.id AS companies_id" 
 		];
 	}
 	
@@ -256,5 +320,15 @@ class Users extends Authenticatable
 	public function sendPasswordResetNotification($token)
 	{
 		$this->notify(new \App\Notifications\ResetPassword($token));
+	}
+	
+
+	/**
+     * Send user account verification link to user email
+     * @return string
+     */
+	public function sendEmailVerificationNotification()
+	{
+		$this->notify(new \App\Notifications\VerifyEmail);
 	}
 }

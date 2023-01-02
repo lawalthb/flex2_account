@@ -63,136 +63,107 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <div class="tab-pane show active fade" id="AccountPageView" role="tabpanel">
                                             <table class="table   ">
                                                 <tbody class="page-data">
-                                                    <div class=" col-12 col-md-4">
-                                                        <div class="bg-light mb-3 card-1 p-2 border rounded">
-                                                            <div class="row align-items-center">
-                                                                <div class="col">
-                                                                    <small class="text-muted">{{ __('id') }}</small>
-                                                                    <div class="fw-bold">
-                                                                        <?php echo  $data['id'] ; ?>
-                                                                    </div>
+                                                    <div class="border-top td-firstname p-2">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <div class="text-muted"> {{ __('firstname') }}</div>
+                                                                <div class="fw-bold">
+                                                                    <?php echo  $data['firstname'] ; ?>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class=" col-12 col-md-4">
-                                                        <div class="bg-light mb-3 card-1 p-2 border rounded">
-                                                            <div class="row align-items-center">
-                                                                <div class="col">
-                                                                    <small class="text-muted">{{ __('firstname') }}</small>
-                                                                    <div class="fw-bold">
-                                                                        <?php echo  $data['firstname'] ; ?>
-                                                                    </div>
+                                                    <div class="border-top td-lastname p-2">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <div class="text-muted"> {{ __('lastname') }}</div>
+                                                                <div class="fw-bold">
+                                                                    <?php echo  $data['lastname'] ; ?>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class=" col-12 col-md-4">
-                                                        <div class="bg-light mb-3 card-1 p-2 border rounded">
-                                                            <div class="row align-items-center">
-                                                                <div class="col">
-                                                                    <small class="text-muted">{{ __('lastname') }}</small>
-                                                                    <div class="fw-bold">
-                                                                        <?php echo  $data['lastname'] ; ?>
-                                                                    </div>
+                                                    <div class="border-top td-email p-2">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <div class="text-muted"> {{ __('email') }}</div>
+                                                                <div class="fw-bold">
+                                                                    <?php echo  $data['email'] ; ?>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class=" col-12 col-md-4">
-                                                        <div class="bg-light mb-3 card-1 p-2 border rounded">
-                                                            <div class="row align-items-center">
-                                                                <div class="col">
-                                                                    <small class="text-muted">{{ __('email') }}</small>
-                                                                    <div class="fw-bold">
-                                                                        <?php echo  $data['email'] ; ?>
-                                                                    </div>
+                                                    <div class="border-top td-role_id p-2">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <div class="text-muted"> {{ __('roleId') }}</div>
+                                                                <div class="fw-bold">
+                                                                    <?php echo  $data['role_id'] ; ?>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class=" col-12 col-md-4">
-                                                        <div class="bg-light mb-3 card-1 p-2 border rounded">
-                                                            <div class="row align-items-center">
-                                                                <div class="col">
-                                                                    <small class="text-muted">{{ __('roleId') }}</small>
-                                                                    <div class="fw-bold">
-                                                                        <?php echo  $data['role_id'] ; ?>
-                                                                    </div>
+                                                    <div class="border-top td-phone p-2">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <div class="text-muted"> {{ __('phone') }}</div>
+                                                                <div class="fw-bold">
+                                                                    <?php echo  $data['phone'] ; ?>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class=" col-12 col-md-4">
-                                                        <div class="bg-light mb-3 card-1 p-2 border rounded">
-                                                            <div class="row align-items-center">
-                                                                <div class="col">
-                                                                    <small class="text-muted">{{ __('phone') }}</small>
-                                                                    <div class="fw-bold">
-                                                                        <?php echo  $data['phone'] ; ?>
-                                                                    </div>
+                                                    <div class="border-top td-user_type p-2">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <div class="text-muted"> {{ __('userType') }}</div>
+                                                                <div class="fw-bold">
+                                                                    <?php echo  $data['user_type'] ; ?>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class=" col-12 col-md-4">
-                                                        <div class="bg-light mb-3 card-1 p-2 border rounded">
-                                                            <div class="row align-items-center">
-                                                                <div class="col">
-                                                                    <small class="text-muted">{{ __('userType') }}</small>
-                                                                    <div class="fw-bold">
-                                                                        <?php echo  $data['user_type'] ; ?>
-                                                                    </div>
+                                                    <div class="border-top td-date_join p-2">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <div class="text-muted"> {{ __('dateJoin') }}</div>
+                                                                <div class="fw-bold">
+                                                                    <?php echo  $data['date_join'] ; ?>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class=" col-12 col-md-4">
-                                                        <div class="bg-light mb-3 card-1 p-2 border rounded">
-                                                            <div class="row align-items-center">
-                                                                <div class="col">
-                                                                    <small class="text-muted">{{ __('dateJoin') }}</small>
-                                                                    <div class="fw-bold">
-                                                                        <?php echo  $data['date_join'] ; ?>
-                                                                    </div>
+                                                    <div class="border-top td-is_active p-2">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <div class="text-muted"> {{ __('isActive') }}</div>
+                                                                <div class="fw-bold">
+                                                                    <?php echo  $data['is_active'] ; ?>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class=" col-12 col-md-4">
-                                                        <div class="bg-light mb-3 card-1 p-2 border rounded">
-                                                            <div class="row align-items-center">
-                                                                <div class="col">
-                                                                    <small class="text-muted">{{ __('isActive') }}</small>
-                                                                    <div class="fw-bold">
-                                                                        <?php echo  $data['is_active'] ; ?>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class=" col-12 col-md-4">
-                                                        <div class="bg-light mb-3 card-1 p-2 border rounded">
-                                                            <div class="row align-items-center">
-                                                                <div class="col">
-                                                                    <small class="text-muted">{{ __('companyId') }}</small>
-                                                                    <div class="fw-bold">
-                                                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("companies/view/$data[company_id]?subpage=1") ?>">
-                                                                        <i class="material-icons">visibility</i> <?php echo "Companies Detail" ?>
+                                                    <div class="border-top td-company_id p-2">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <div class="text-muted"> {{ __('companyName') }}</div>
+                                                                <div class="fw-bold">
+                                                                    <div class="inline-page">
+                                                                        <a class="btn btn-sm btn btn-secondary open-page-inline" href="<?php print_link("companies//$data[company_id]?subpage=1"); ?>">
+                                                                        <?php echo $data['companies_name'] ?>
                                                                     </a>
+                                                                    <div class="page-content reset-grids d-none"></div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class=" col-12 col-md-4">
-                                                    <div class="bg-light mb-3 card-1 p-2 border rounded">
-                                                        <div class="row align-items-center">
-                                                            <div class="col">
-                                                                <small class="text-muted">{{ __('username') }}</small>
-                                                                <div class="fw-bold">
-                                                                    <?php echo  $data['username'] ; ?>
-                                                                </div>
+                                                <div class="border-top td-username p-2">
+                                                    <div class="row align-items-center">
+                                                        <div class="col">
+                                                            <div class="text-muted"> {{ __('username') }}</div>
+                                                            <div class="fw-bold">
+                                                                <?php echo  $data['username'] ; ?>
                                                             </div>
                                                         </div>
                                                     </div>

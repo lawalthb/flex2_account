@@ -59,8 +59,8 @@
                             </div>
                             
                         </div>
-                        <div class=" card-7">                                   <div class="text-center">
-                            {{ __('dontHaveAnAccount') }} <a href="{{ route('auth.register') }}" class="btn btn-success">{{ __('register') }}
+                        <div class=" card-7">                                    <div class="text-center">
+                            {{ __('dontHaveAnAccount') }} <a href="{{ route('companies.add') }}" class="btn btn-success">{{ __('register') }}
                             <i class="material-icons">account_box</i></a>
                         </div>
                     </div>

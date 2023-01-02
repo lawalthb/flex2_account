@@ -25,6 +25,9 @@ class ProductsController extends Controller
 			$search = trim($request->search);
 			Products::search($query, $search); // search table records
 		}
+		$query->join("product_categories", "products.category", "=", "product_categories.id");
+		$query->join("users", "products.user_id", "=", "users.id");
+		$query->join("units", "products.unit", "=", "units.id");
 		$orderby = $request->orderby ?? "products.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
@@ -79,6 +82,7 @@ class ProductsController extends Controller
 			$fileInfo = $this->moveUploadedFiles($modeldata['image'], "image");
 			$modeldata['image'] = $fileInfo['filepath'];
 		}
+		$modeldata['company_id'] = auth()->user()->id;
 		
 		//save Products record
 		$record = Products::create($modeldata);
@@ -124,5 +128,32 @@ class ProductsController extends Controller
 		$query->delete();
 		$redirectUrl = $request->redirect ?? url()->previous();
 		return $this->redirect($redirectUrl, __('recordDeletedSuccessfully'));
+	}
+	
+
+	/**
+     * List table records
+	 * @param  \Illuminate\Http\Request
+     * @param string $fieldname //filter records by a table field
+     * @param string $fieldvalue //filter value
+     * @return \Illuminate\View\View
+     */
+	function copm_products(Request $request, $fieldname = null , $fieldvalue = null){
+		$view = "pages.products.copm_products";
+		$query = Products::query();
+		$limit = $request->limit ?? 10;
+		if($request->search){
+			$search = trim($request->search);
+			Products::search($query, $search); // search table records
+		}
+		$query->join("product_categories", "products.category", "=", "product_categories.id");
+		$orderby = $request->orderby ?? "products.id";
+		$ordertype = $request->ordertype ?? "desc";
+		$query->orderBy($orderby, $ordertype);
+		if($fieldname){
+			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		$records = $query->paginate($limit, Products::copmProductsFields());
+		return $this->renderView($view, compact("records"));
 	}
 }

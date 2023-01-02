@@ -26,8 +26,8 @@ class Product_CategoriesEditRequest extends FormRequest
         return [
             
 				"name" => "filled|string",
-				"is_active" => "filled|string",
-				"company_id" => "filled|numeric",
+				"is_active" => "filled",
+				"company_id" => "filled",
             
         ];
     }

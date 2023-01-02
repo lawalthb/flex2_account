@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\DB;
 
 /**
  * print out url
@@ -657,4 +658,25 @@ function make_readable($string = '')
 		$string = preg_replace('/\s+/', ' ', $string);
 	}
 	return $string;
+}
+
+
+function lawal()
+{
+	// $user = @DB::table('users')->get();
+	// //$companyName = Companies::get();
+	// return $user ;
+}
+
+function getUserCompanyName()
+{
+	$userid = auth()->user()->company_id;
+	if(!isset($userid)){
+		return $companyName ="Lawal ";
+	}else{
+	$companyName = @DB::table('companies')
+    			 ->where('id', '=', $userid)
+   				 ->get();
+	return $companyName ;
+}
 }

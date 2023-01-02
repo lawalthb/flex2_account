@@ -98,9 +98,39 @@
 			'path' => 'users',
 			'label' => __('users'), 
 			'icon' => '<i class="material-icons">extension</i>'
+		],
+		
+		[
+			'path' => 'users/usersincomp',
+			'label' => __('companyUsers'), 
+			'icon' => '<i class="material-icons">extension</i>'
+		],
+		
+		[
+			'path' => 'product_categories/comp_product_cat',
+			'label' => __('compProductCat'), 
+			'icon' => '<i class="material-icons">extension</i>'
+		],
+		
+		[
+			'path' => 'products/copm_products',
+			'label' => __('copmProducts'), 
+			'icon' => '<i class="material-icons">extension</i>'
 		]
 	] ;
 	}
 	
 		
+	public static function is_active(){
+		return [
+		[
+			'value' => 'Yes', 
+			'label' => __('yes'), 
+		],
+		[
+			'value' => 'No', 
+			'label' => __('no'), 
+		],] ;
+	}
+	
 	}

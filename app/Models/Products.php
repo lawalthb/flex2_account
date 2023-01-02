@@ -28,7 +28,7 @@ class Products extends Model
      * @var array
      */
 	protected $fillable = [
-		'company_id','name','category','image','mfg_date','exp_date','qty','selling_price','purchase_price','dead_stock','is_active','user_id','unit'
+		'company_id','category','name','unit','qty','selling_price','purchase_price','dead_stock','is_active','user_id','exp_date','mfg_date','image'
 	];
 	public $timestamps = false;
 	
@@ -41,7 +41,7 @@ class Products extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				name LIKE ? 
+				products.name LIKE ? 
 		)';
 		$search_params = [
 			"%$text%"
@@ -58,20 +58,17 @@ class Products extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"company_id",
-			"name",
-			"category",
-			"image",
-			"mfg_date",
-			"exp_date",
-			"qty",
-			"selling_price",
-			"purchase_price",
-			"dead_stock",
-			"is_active",
-			"user_id",
-			"unit" 
+			"products.name AS name",
+			"products.category AS category",
+			"product_categories.name AS product_categories_name",
+			"products.qty AS qty",
+			"products.selling_price AS selling_price",
+			"products.purchase_price AS purchase_price",
+			"products.user_id AS user_id",
+			"users.username AS users_username",
+			"products.unit AS unit",
+			"units.name AS units_name",
+			"products.id AS id" 
 		];
 	}
 	
@@ -83,20 +80,17 @@ class Products extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"company_id",
-			"name",
-			"category",
-			"image",
-			"mfg_date",
-			"exp_date",
-			"qty",
-			"selling_price",
-			"purchase_price",
-			"dead_stock",
-			"is_active",
-			"user_id",
-			"unit" 
+			"products.name AS name",
+			"products.category AS category",
+			"product_categories.name AS product_categories_name",
+			"products.qty AS qty",
+			"products.selling_price AS selling_price",
+			"products.purchase_price AS purchase_price",
+			"products.user_id AS user_id",
+			"users.username AS users_username",
+			"products.unit AS unit",
+			"units.name AS units_name",
+			"products.id AS id" 
 		];
 	}
 	
@@ -158,20 +152,61 @@ class Products extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
-			"company_id",
-			"name",
 			"category",
-			"image",
-			"mfg_date",
-			"exp_date",
+			"name",
+			"unit",
 			"qty",
 			"selling_price",
 			"purchase_price",
 			"dead_stock",
 			"is_active",
 			"user_id",
-			"unit" 
+			"exp_date",
+			"mfg_date",
+			"image",
+			"id" 
+		];
+	}
+	
+
+	/**
+     * return copmProducts page fields of the model.
+     * 
+     * @return array
+     */
+	public static function copmProductsFields(){
+		return [ 
+			"products.name AS name",
+			"products.category AS category",
+			"product_categories.name AS product_categories_name",
+			"products.qty AS qty",
+			"products.selling_price AS selling_price",
+			"products.purchase_price AS purchase_price",
+			"products.user_id AS user_id",
+			"products.unit AS unit",
+			"products.company_id AS company_id",
+			"products.id AS id" 
+		];
+	}
+	
+
+	/**
+     * return exportCopmProducts page fields of the model.
+     * 
+     * @return array
+     */
+	public static function exportCopmProductsFields(){
+		return [ 
+			"products.name AS name",
+			"products.category AS category",
+			"product_categories.name AS product_categories_name",
+			"products.qty AS qty",
+			"products.selling_price AS selling_price",
+			"products.purchase_price AS purchase_price",
+			"products.user_id AS user_id",
+			"products.unit AS unit",
+			"products.company_id AS company_id",
+			"products.id AS id" 
 		];
 	}
 }

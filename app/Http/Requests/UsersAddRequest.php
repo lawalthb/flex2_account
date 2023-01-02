@@ -25,10 +25,12 @@ class UsersAddRequest extends FormRequest
 		
         return [
             
+				"firstname" => "required|string",
+				"lastname" => "nullable|string",
 				"email" => "required|email|unique:users,email",
-				"password" => "required|same:confirm_password",
-				"photo" => "nullable",
 				"username" => "required|string|unique:users,username",
+				"phone" => "nullable|string",
+				"company_id" => "nullable",
             
         ];
     }

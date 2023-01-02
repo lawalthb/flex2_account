@@ -65,13 +65,12 @@ class AuthController extends Controller{
 			$fileInfo = $this->moveUploadedFiles($modeldata['photo'], "photo");
 			$modeldata['photo'] = $fileInfo['filepath'];
 		}
-		$modeldata['password'] = bcrypt($modeldata['password']);
 		
 		//save Users record
 		$user = $record = Users::create($modeldata);
 		$rec_id = $record->id;
-		Auth::login($user);
-		return $this->redirectIntended("/home", __('loginCompleted'));
+		$user->sendEmailVerificationNotification();
+		return redirect()->route('verification.verify', ['id' => $user->id]);
 	}
 	
 
@@ -99,6 +98,56 @@ class AuthController extends Controller{
      */
 	function accountpending(Request $request){
 		return view("pages.index.accountpending");
+	}
+	
+
+	/**
+     * Verify user email
+     * @return \Illuminate\Http\Response
+     */
+	public function verifyEmail(Request $request) {
+		$user_id = $request->get("id");
+		if (!$request->hasValidSignature()) {
+			return view('pages.verifyemail.message')->withErrors("Invalid/Expired url provided");
+		}
+		$user = Users::findOrFail($user_id);
+		if (!$user->hasVerifiedEmail()) {
+			$user->markEmailAsVerified();
+		}
+		return redirect()->route("verification.verified");
+	}
+	
+
+	/**
+     * Resend verify email message
+     * @return \Illuminate\View\View
+     */
+	public function resendVerifyEmail(Request $request) {
+		$user_id = $request->get("id");
+		$user = Users::findOrFail($user_id);
+		if ($user->hasVerifiedEmail()) {
+			return view('pages.verifyemail.message')->withErrors("Email already verified.");
+		}
+		$user->sendEmailVerificationNotification();
+		return view('pages.verifyemail.message')->with("message", __('emailVerificationResent'));
+	}
+	
+
+	/**
+     * Display email verified page
+     * @return \Illuminate\View\View
+     */
+	public function emailVerified() {
+		return view("pages.verifyemail.emailverified");
+	}
+	
+
+	/**
+     * Display verify email page
+     * @return \Illuminate\View\View
+     */
+	public function showVerifyEmail() {
+		return view("pages.verifyemail.message")->with('id', auth()->user()->id);
 	}
 	
 

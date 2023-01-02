@@ -27,6 +27,7 @@ class UsersController extends Controller
 			$search = trim($request->search);
 			Users::search($query, $search); // search table records
 		}
+		$query->join("companies", "users.company_id", "=", "companies.id");
 		$orderby = $request->orderby ?? "users.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
@@ -45,6 +46,7 @@ class UsersController extends Controller
      */
 	function view($rec_id = null){
 		$query = Users::query();
+		$query->join("companies", "users.company_id", "=", "companies.id");
 		$record = $query->findOrFail($rec_id, Users::viewFields());
 		return $this->renderView("pages.users.view", ["data" => $record]);
 	}
@@ -75,13 +77,6 @@ class UsersController extends Controller
      */
 	function store(UsersAddRequest $request){
 		$modeldata = $this->normalizeFormData($request->validated());
-		
-		if( array_key_exists("photo", $modeldata) ){
-			//move uploaded file from temp directory to destination directory
-			$fileInfo = $this->moveUploadedFiles($modeldata['photo'], "photo");
-			$modeldata['photo'] = $fileInfo['filepath'];
-		}
-		$modeldata['password'] = bcrypt($modeldata['password']);
 		
 		//save Users record
 		$record = Users::create($modeldata);
@@ -127,5 +122,33 @@ class UsersController extends Controller
 		$query->delete();
 		$redirectUrl = $request->redirect ?? url()->previous();
 		return $this->redirect($redirectUrl, __('recordDeletedSuccessfully'));
+	}
+	
+
+	/**
+     * List table records
+	 * @param  \Illuminate\Http\Request
+     * @param string $fieldname //filter records by a table field
+     * @param string $fieldvalue //filter value
+     * @return \Illuminate\View\View
+     */
+	function usersincomp(Request $request, $fieldname = null , $fieldvalue = null){
+		$view = "pages.users.usersincomp";
+		$query = Users::query();
+		$limit = $request->limit ?? 10;
+		if($request->search){
+			$search = trim($request->search);
+			Users::search($query, $search); // search table records
+		}
+		$query->join("companies", "users.company_id", "=", "companies.id");
+		$orderby = $request->orderby ?? "users.id";
+		$ordertype = $request->ordertype ?? "desc";
+		$query->orderBy($orderby, $ordertype);
+		$query->where("company_id", "=" , auth()->user()->company_id);
+		if($fieldname){
+			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		$records = $query->paginate($limit, Users::usersincompFields());
+		return $this->renderView($view, compact("records"));
 	}
 }

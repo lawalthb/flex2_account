@@ -70,7 +70,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 <th class="td-" > </th><th class="td-id" > {{ __('id') }}</th>
                                                 <th class="td-name" > {{ __('name') }}</th>
                                                 <th class="td-is_active" > {{ __('isActive') }}</th>
-                                                <th class="td-company_id" > {{ __('companyId') }}</th>
+                                                <th class="td-company_id" > {{ __('companyName') }}</th>
                                                 <th class="td-btn"></th>
                                             </tr>
                                         </thead>
@@ -107,92 +107,94 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 <?php echo  $data['is_active'] ; ?>
                                             </td>
                                             <td class="td-company_id">
-                                                <?php echo  $data['company_id'] ; ?>
-                                            </td>
-                                            <!--PageComponentEnd-->
-                                            <td class="td-btn">
-                                                <div class="dropdown" >
-                                                    <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
-                                                    <i class="material-icons">menu</i> 
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <a class="dropdown-item "   href="<?php print_link("product_categories/view/$rec_id"); ?>" >
-                                                        <i class="material-icons">visibility</i> {{ __('view') }}
-                                                    </a>
-                                                    <a class="dropdown-item "   href="<?php print_link("product_categories/edit/$rec_id"); ?>" >
-                                                    <i class="material-icons">edit</i> {{ __('edit') }}
-                                                </a>
-                                                <a class="dropdown-item record-delete-btn" data-prompt-msg="{{ __('promptDeleteRecord') }}" data-display-style="modal" href="<?php print_link("product_categories/delete/$rec_id"); ?>" >
-                                                <i class="material-icons">delete_sweep</i> {{ __('delete') }}
+                                                <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("companies/view/$data[company_id]?subpage=1") ?>">
+                                                <?php echo $data['companies_name'] ?>
                                             </a>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php 
-                                }
-                            ?>
-                            <!--endrecord-->
-                        </tbody>
-                        <tbody class="search-data"></tbody>
-                        <?php
+                                        </td>
+                                        <!--PageComponentEnd-->
+                                        <td class="td-btn">
+                                            <div class="dropdown" >
+                                                <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
+                                                <i class="material-icons">menu</i> 
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <a class="dropdown-item "   href="<?php print_link("product_categories/view/$rec_id"); ?>" >
+                                                    <i class="material-icons">visibility</i> {{ __('view') }}
+                                                </a>
+                                                <a class="dropdown-item "   href="<?php print_link("product_categories/edit/$rec_id"); ?>" >
+                                                <i class="material-icons">edit</i> {{ __('edit') }}
+                                            </a>
+                                            <a class="dropdown-item record-delete-btn" data-prompt-msg="{{ __('promptDeleteRecord') }}" data-display-style="modal" href="<?php print_link("product_categories/delete/$rec_id"); ?>" >
+                                            <i class="material-icons">delete_sweep</i> {{ __('delete') }}
+                                        </a>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php 
                             }
-                            else{
                         ?>
-                        <tbody class="page-data">
-                            <tr>
-                                <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
-                                    <i class="material-icons">block</i> {{ __('noRecordFound') }}
-                                </td>
-                            </tr>
-                        </tbody>
-                        <?php
-                            }
-                        ?>
-                    </table>
-                </div>
-                <?php
-                    if($show_footer){
-                ?>
-                <div class=" mt-3">
-                    <div class="row align-items-center justify-content-between">    
-                        <div class="col-md-auto justify-content-center">    
-                            <div class="d-flex justify-content-start">  
-                                <button data-prompt-msg="{{ __('promptDeleteRecords') }}" data-display-style="modal" data-url="<?php print_link("product_categories/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
-                                <i class="material-icons">delete_sweep</i> {{ __('deleteSelected') }}
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col">   
-                            <?php
-                                if($show_pagination == true){
-                                $pager = new Pagination($total_records, $record_count);
-                                $pager->show_page_count = false;
-                                $pager->show_record_count = true;
-                                $pager->show_page_limit =false;
-                                $pager->limit = $limit;
-                                $pager->show_page_number_list = true;
-                                $pager->pager_link_range=5;
-                                $pager->render();
-                                }
-                            ?>
+                        <!--endrecord-->
+                    </tbody>
+                    <tbody class="search-data"></tbody>
+                    <?php
+                        }
+                        else{
+                    ?>
+                    <tbody class="page-data">
+                        <tr>
+                            <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
+                                <i class="material-icons">block</i> {{ __('noRecordFound') }}
+                            </td>
+                        </tr>
+                    </tbody>
+                    <?php
+                        }
+                    ?>
+                </table>
+            </div>
+            <?php
+                if($show_footer){
+            ?>
+            <div class=" mt-3">
+                <div class="row align-items-center justify-content-between">    
+                    <div class="col-md-auto justify-content-center">    
+                        <div class="d-flex justify-content-start">  
+                            <button data-prompt-msg="{{ __('promptDeleteRecords') }}" data-display-style="modal" data-url="<?php print_link("product_categories/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
+                            <i class="material-icons">delete_sweep</i> {{ __('deleteSelected') }}
+                            </button>
                         </div>
                     </div>
+                    <div class="col">   
+                        <?php
+                            if($show_pagination == true){
+                            $pager = new Pagination($total_records, $record_count);
+                            $pager->show_page_count = false;
+                            $pager->show_record_count = true;
+                            $pager->show_page_limit =false;
+                            $pager->limit = $limit;
+                            $pager->show_page_number_list = true;
+                            $pager->pager_link_range=5;
+                            $pager->render();
+                            }
+                        ?>
+                    </div>
                 </div>
-                <?php
-                    }
-                ?>
             </div>
-            <!-- Detail Page Column -->
-            <?php if(!request()->has('subpage')){ ?>
-            <div class="col-12">
-                <div class=" ">
-                    <div id="product_categories-detail-page" class="master-detail-page"></div>
-                </div>
-            </div>
-            <?php } ?>
+            <?php
+                }
+            ?>
         </div>
+        <!-- Detail Page Column -->
+        <?php if(!request()->has('subpage')){ ?>
+        <div class="col-12">
+            <div class=" ">
+                <div id="product_categories-detail-page" class="master-detail-page"></div>
+            </div>
+        </div>
+        <?php } ?>
     </div>
+</div>
 </div>
 </div>
 </div>

@@ -43,11 +43,16 @@ use Illuminate\Support\Facades\Mail;
 	Route::get('auth/password/resetcompleted', 'AuthController@passwordResetCompleted')->name('password.resetcompleted');
 	Route::get('auth/password/linksent', 'AuthController@passwordResetLinkSent')->name('password.resetlinksent');
 	
+	Route::get('auth/email/showverifyemail', 'AuthController@showVerifyEmail')->name('verification.notice');
+	Route::get('auth/email/verify', 'AuthController@verifyEmail')->name('verification.verify');
+	Route::get('auth/email/verified', 'AuthController@emailVerified')->name('verification.verified');
+	Route::get('auth/email/resend', 'AuthController@resendVerifyEmail')->name('verification.resend');
+	
 
 /**
  * All routes which requires auth
  */
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 		
 	Route::get('home', 'HomeController@index')->name('home');
 
@@ -153,7 +158,9 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('product_categories/add', 'Product_CategoriesController@store')->name('product_categories.store');
 		
 	Route::any('product_categories/edit/{rec_id}', 'Product_CategoriesController@edit')->name('product_categories.edit');	
-	Route::get('product_categories/delete/{rec_id}', 'Product_CategoriesController@delete');
+	Route::get('product_categories/delete/{rec_id}', 'Product_CategoriesController@delete');	
+	Route::get('product_categories/comp_product_cat', 'Product_CategoriesController@comp_product_cat');
+	Route::get('product_categories/comp_product_cat/{filter?}/{filtervalue?}', 'Product_CategoriesController@comp_product_cat');
 
 /* routes for Products Controller */	
 	Route::get('products', 'ProductsController@index')->name('products.index');
@@ -165,7 +172,9 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('products/add', 'ProductsController@store')->name('products.store');
 		
 	Route::any('products/edit/{rec_id}', 'ProductsController@edit')->name('products.edit');	
-	Route::get('products/delete/{rec_id}', 'ProductsController@delete');
+	Route::get('products/delete/{rec_id}', 'ProductsController@delete');	
+	Route::get('products/copm_products', 'ProductsController@copm_products');
+	Route::get('products/copm_products/{filter?}/{filtervalue?}', 'ProductsController@copm_products');
 
 /* routes for Source_Documents Controller */	
 	Route::get('source_documents', 'Source_DocumentsController@index')->name('source_documents.index');
@@ -227,10 +236,18 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('users/add', 'UsersController@store')->name('users.store');
 		
 	Route::any('users/edit/{rec_id}', 'UsersController@edit')->name('users.edit');	
-	Route::get('users/delete/{rec_id}', 'UsersController@delete');
+	Route::get('users/delete/{rec_id}', 'UsersController@delete');	
+	Route::get('users/usersincomp', 'UsersController@usersincomp');
+	Route::get('users/usersincomp/{filter?}/{filtervalue?}', 'UsersController@usersincomp');
 });
 
 
+	
+Route::get('componentsdata/companies_name_value_exist',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->companies_name_value_exist($request);
+	}
+)->middleware(['auth']);
 	
 Route::get('componentsdata/doc_type_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();

@@ -26,8 +26,8 @@ class Product_CategoriesAddRequest extends FormRequest
         return [
             
 				"name" => "required|string",
-				"is_active" => "required|string",
-				"company_id" => "required|numeric",
+				"is_active" => "required",
+				"company_id" => "required",
             
         ];
     }

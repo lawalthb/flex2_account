@@ -4,7 +4,16 @@
 		<title>@yield('title')</title>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" />
+		@if(Auth::check())
+		<?php $companyNames =getUserCompanyName();
+           foreach($companyNames as $companyName ){ ?>
+             <link rel="shortcut icon" href="{{  $companyName->favicon }}" /> 
+             
+           <?php }           ?>
+		  
+		  
+
+		   @endif
 		<meta name="theme-color" content="" />
 		<meta name="author" content="" />
 		<meta name="keyword" content="" />

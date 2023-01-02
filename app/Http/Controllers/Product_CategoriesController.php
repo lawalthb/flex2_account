@@ -25,6 +25,7 @@ class Product_CategoriesController extends Controller
 			$search = trim($request->search);
 			Product_Categories::search($query, $search); // search table records
 		}
+		$query->join("companies", "product_categories.company_id", "=", "companies.id");
 		$orderby = $request->orderby ?? "product_categories.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
@@ -112,5 +113,33 @@ class Product_CategoriesController extends Controller
 		$query->delete();
 		$redirectUrl = $request->redirect ?? url()->previous();
 		return $this->redirect($redirectUrl, __('recordDeletedSuccessfully'));
+	}
+	
+
+	/**
+     * List table records
+	 * @param  \Illuminate\Http\Request
+     * @param string $fieldname //filter records by a table field
+     * @param string $fieldvalue //filter value
+     * @return \Illuminate\View\View
+     */
+	function comp_product_cat(Request $request, $fieldname = null , $fieldvalue = null){
+		$view = "pages.product_categories.comp_product_cat";
+		$query = Product_Categories::query();
+		$limit = $request->limit ?? 10;
+		if($request->search){
+			$search = trim($request->search);
+			Product_Categories::search($query, $search); // search table records
+		}
+		$query->join("companies", "product_categories.company_id", "=", "companies.id");
+		$orderby = $request->orderby ?? "product_categories.id";
+		$ordertype = $request->ordertype ?? "desc";
+		$query->orderBy($orderby, $ordertype);
+		$query->where("company_id", "=" , auth()->user()->company_id);
+		if($fieldname){
+			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		$records = $query->paginate($limit, Product_Categories::compProductCatFields());
+		return $this->renderView($view, compact("records"));
 	}
 }

@@ -25,7 +25,7 @@ class CompaniesAddRequest extends FormRequest
 		
         return [
             
-				"name" => "required|string",
+				"name" => "required|string|unique:companies,name",
 				"slogan" => "nullable|string",
 				"com_phone" => "nullable|string",
 				"com_email" => "nullable|email",

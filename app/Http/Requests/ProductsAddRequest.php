@@ -25,19 +25,18 @@ class ProductsAddRequest extends FormRequest
 		
         return [
             
-				"company_id" => "required",
-				"name" => "required|string",
 				"category" => "required",
-				"image" => "nullable",
-				"mfg_date" => "nullable|date",
-				"exp_date" => "nullable|date",
+				"name" => "required|string",
+				"unit" => "nullable",
 				"qty" => "required|numeric",
 				"selling_price" => "required|numeric",
 				"purchase_price" => "required|numeric",
-				"dead_stock" => "required|numeric",
-				"is_active" => "required|string",
+				"dead_stock" => "required",
+				"is_active" => "required",
 				"user_id" => "required",
-				"unit" => "nullable",
+				"exp_date" => "nullable|date",
+				"mfg_date" => "nullable|date",
+				"image" => "nullable",
             
         ];
     }

@@ -47,11 +47,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="control-label" for="name">{{ __('name') }} <span class="text-danger">*</span></label>
+                                        <label class="control-label" for="name">{{ __('categoryName') }} <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-name-holder" class=" ">
-                                            <input id="ctrl-name" data-field="name"  value="<?php  echo $data['name']; ?>" type="text" placeholder="{{ __('enterName') }}"  required="" name="name"  class="form-control " />
+                                            <input id="ctrl-name" data-field="name"  value="<?php  echo $data['name']; ?>" type="text" placeholder="{{ __('enterCategoryName') }}"  required="" name="name"  class="form-control " />
                                         </div>
                                     </div>
                                 </div>
@@ -63,23 +63,29 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-is_active-holder" class=" ">
-                                            <input id="ctrl-is_active" data-field="is_active"  value="<?php  echo $data['is_active']; ?>" type="text" placeholder="{{ __('enterIsActive') }}"  required="" name="is_active"  class="form-control " />
+                                            <?php
+                                                $options = Menu::is_active();
+                                                $field_value = $data['is_active'];
+                                                if(!empty($options)){
+                                                foreach($options as $option){
+                                                $value = $option['value'];
+                                                $label = $option['label'];
+                                                //check if value is among checked options
+                                                $checked = Html::get_record_checked($field_value, $value);
+                                            ?>
+                                            <label class="form-check form-check-inline">
+                                            <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio" required=""   name="is_active" />
+                                            <span class="form-check-label"><?php echo $label ?></span>
+                                            </label>
+                                            <?php
+                                                }
+                                                }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="company_id">{{ __('companyId') }} <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-company_id-holder" class=" ">
-                                            <input id="ctrl-company_id" data-field="company_id"  value="<?php  echo $data['company_id']; ?>" type="number" placeholder="{{ __('enterCompanyId') }}" step="any"  required="" name="company_id"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <input id="ctrl-company_id" data-field="company_id"  value="<?php  echo $data['company_id']; ?>" type="hidden" placeholder="{{ __('enterCompanyId') }}"  required="" name="company_id"  class="form-control " />
                         </div>
                         <div class="form-ajax-status"></div>
                         <!--[form-content-end]-->

@@ -23,9 +23,11 @@ class CompaniesEditRequest extends FormRequest
     public function rules()
     {
 		
+		$rec_id = request()->route('rec_id');
+
         return [
             
-				"name" => "filled|string",
+				"name" => "filled|string|unique:companies,name,$rec_id,id",
 				"slogan" => "nullable|string",
 				"com_phone" => "nullable|string",
 				"com_email" => "nullable|email",

@@ -25,19 +25,18 @@ class ProductsEditRequest extends FormRequest
 		
         return [
             
-				"company_id" => "filled",
-				"name" => "filled|string",
 				"category" => "filled",
-				"image" => "nullable",
-				"mfg_date" => "nullable|date",
-				"exp_date" => "nullable|date",
+				"name" => "filled|string",
+				"unit" => "nullable",
 				"qty" => "filled|numeric",
 				"selling_price" => "filled|numeric",
 				"purchase_price" => "filled|numeric",
-				"dead_stock" => "filled|numeric",
-				"is_active" => "filled|string",
+				"dead_stock" => "filled",
+				"is_active" => "filled",
 				"user_id" => "filled",
-				"unit" => "nullable",
+				"exp_date" => "nullable|date",
+				"mfg_date" => "nullable|date",
+				"image" => "nullable",
             
         ];
     }

@@ -34,6 +34,7 @@ class UsersAccountEditRequest extends FormRequest
 				"is_active" => "nullable|string",
 				"company_id" => "nullable|numeric",
 				"username" => "filled|string",
+				"email_verified_at" => "nullable|date",
             
         ];
     }

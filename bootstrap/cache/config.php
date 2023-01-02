@@ -735,11 +735,11 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => '',
-        'port' => '',
+        'host' => 'smtp.mailtrap.io',
+        'port' => '2525',
         'encryption' => NULL,
-        'username' => '',
-        'password' => '',
+        'username' => 'ce345fc657fe59',
+        'password' => '302ad16bdd92dc',
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -772,8 +772,8 @@
     ),
     'from' => 
     array (
-      'address' => '',
-      'name' => '',
+      'address' => 'flexaccount@gmail.com',
+      'name' => 'Flex Plast Account App',
     ),
     'markdown' => 
     array (

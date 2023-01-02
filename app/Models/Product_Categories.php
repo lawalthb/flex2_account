@@ -41,7 +41,7 @@ class Product_Categories extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				name LIKE ? 
+				product_categories.name LIKE ? 
 		)';
 		$search_params = [
 			"%$text%"
@@ -58,10 +58,11 @@ class Product_Categories extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"name",
-			"is_active",
-			"company_id" 
+			"product_categories.id AS id",
+			"product_categories.name AS name",
+			"product_categories.is_active AS is_active",
+			"product_categories.company_id AS company_id",
+			"companies.name AS companies_name" 
 		];
 	}
 	
@@ -73,10 +74,11 @@ class Product_Categories extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"name",
-			"is_active",
-			"company_id" 
+			"product_categories.id AS id",
+			"product_categories.name AS name",
+			"product_categories.is_active AS is_active",
+			"product_categories.company_id AS company_id",
+			"companies.name AS companies_name" 
 		];
 	}
 	
@@ -118,10 +120,42 @@ class Product_Categories extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"name",
 			"is_active",
-			"company_id" 
+			"company_id",
+			"id" 
+		];
+	}
+	
+
+	/**
+     * return compProductCat page fields of the model.
+     * 
+     * @return array
+     */
+	public static function compProductCatFields(){
+		return [ 
+			"product_categories.id AS id",
+			"product_categories.name AS name",
+			"product_categories.is_active AS is_active",
+			"product_categories.company_id AS company_id",
+			"companies.name AS companies_name" 
+		];
+	}
+	
+
+	/**
+     * return exportCompProductCat page fields of the model.
+     * 
+     * @return array
+     */
+	public static function exportCompProductCatFields(){
+		return [ 
+			"product_categories.id AS id",
+			"product_categories.name AS name",
+			"product_categories.is_active AS is_active",
+			"product_categories.company_id AS company_id",
+			"companies.name AS companies_name" 
 		];
 	}
 }
