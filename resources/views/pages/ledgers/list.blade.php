@@ -68,18 +68,13 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 </label>
                                                 </th>
                                                 <th class="td-" > </th><th class="td-id" > {{ __('id') }}</th>
-                                                <th class="td-company_id" > {{ __('companyId') }}</th>
-                                                <th class="td-sub_account_group_id" > {{ __('subAccountGroupId') }}</th>
                                                 <th class="td-ledger_name" > {{ __('ledgerName') }}</th>
-                                                <th class="td-marketer_id" > {{ __('marketerId') }}</th>
                                                 <th class="td-address" > {{ __('address') }}</th>
                                                 <th class="td-email" > {{ __('email') }}</th>
-                                                <th class="td-phone" > {{ __('phone') }}</th>
                                                 <th class="td-contact_person" > {{ __('contactPerson') }}</th>
-                                                <th class="td-opening_balance" > {{ __('openingBalance') }}</th>
+                                                <th class="td-credit_amount" > {{ __('creditAmount') }}</th>
+                                                <th class="td-debit_amount" > {{ __('debitAmount') }}</th>
                                                 <th class="td-is_active" > {{ __('isActive') }}</th>
-                                                <th class="td-user_id" > {{ __('userId') }}</th>
-                                                <th class="td-reg_date" > {{ __('regDate') }}</th>
                                                 <th class="td-btn"></th>
                                             </tr>
                                         </thead>
@@ -109,132 +104,104 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             <td class="td-id">
                                                 <a href="<?php print_link("ledgers/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
                                             </td>
-                                            <td class="td-company_id">
-                                                <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("companies/view/$data[company_id]?subpage=1") ?>">
-                                                <i class="material-icons">visibility</i> <?php echo "Companies" ?>
+                                            <td class="td-ledger_name">
+                                                <?php echo  $data['ledger_name'] ; ?>
+                                            </td>
+                                            <td class="td-address">
+                                                <?php echo  $data['address'] ; ?>
+                                            </td>
+                                            <td class="td-email">
+                                                <a href="<?php print_link("mailto:$data[email]") ?>"><?php echo $data['email']; ?></a>
+                                            </td>
+                                            <td class="td-contact_person">
+                                                <?php echo  $data['contact_person'] ; ?>
+                                            </td>
+                                            <td class="td-credit_amount">
+                                                <?php echo  $data['credit_amount'] ; ?>
+                                            </td>
+                                            <td class="td-debit_amount">
+                                                <?php echo  $data['debit_amount'] ; ?>
+                                            </td>
+                                            <td class="td-is_active">
+                                                <?php echo  $data['is_active'] ; ?>
+                                            </td>
+                                            <!--PageComponentEnd-->
+                                            <td class="td-btn">
+                                                <a class="btn btn-sm btn-primary has-tooltip "    href="<?php print_link("ledgers/view/$rec_id"); ?>" >
+                                                <i class="material-icons">visibility</i> {{ __('view') }}
                                             </a>
-                                        </td>
-                                        <td class="td-sub_account_group_id">
-                                            <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("sub_account_group/view/$data[sub_account_group_id]?subpage=1") ?>">
-                                            <i class="material-icons">visibility</i> <?php echo "Sub Account Group" ?>
+                                            <a class="btn btn-sm btn-success has-tooltip "    href="<?php print_link("ledgers/edit/$rec_id"); ?>" >
+                                            <i class="material-icons">edit</i> {{ __('edit') }}
                                         </a>
-                                    </td>
-                                    <td class="td-ledger_name">
-                                        <?php echo  $data['ledger_name'] ; ?>
-                                    </td>
-                                    <td class="td-marketer_id">
-                                        <?php echo  $data['marketer_id'] ; ?>
-                                    </td>
-                                    <td class="td-address">
-                                        <?php echo  $data['address'] ; ?>
-                                    </td>
-                                    <td class="td-email">
-                                        <a href="<?php print_link("mailto:$data[email]") ?>"><?php echo $data['email']; ?></a>
-                                    </td>
-                                    <td class="td-phone">
-                                        <a href="<?php print_link("tel:$data[phone]") ?>"><?php echo $data['phone']; ?></a>
-                                    </td>
-                                    <td class="td-contact_person">
-                                        <?php echo  $data['contact_person'] ; ?>
-                                    </td>
-                                    <td class="td-opening_balance">
-                                        <?php echo  $data['opening_balance'] ; ?>
-                                    </td>
-                                    <td class="td-is_active">
-                                        <?php echo  $data['is_active'] ; ?>
-                                    </td>
-                                    <td class="td-user_id">
-                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[user_id]?subpage=1") ?>">
-                                        <i class="material-icons">visibility</i> <?php echo "Users" ?>
+                                        <a class="btn btn-sm btn-danger has-tooltip record-delete-btn" data-prompt-msg="{{ __('promptDeleteRecord') }}" data-display-style="modal"  href="<?php print_link("ledgers/delete/$rec_id"); ?>" >
+                                        <i class="material-icons">delete_sweep</i> {{ __('delete') }}
                                     </a>
                                 </td>
-                                <td class="td-reg_date">
-                                    <?php echo  $data['reg_date'] ; ?>
+                            </tr>
+                            <?php 
+                                }
+                            ?>
+                            <!--endrecord-->
+                        </tbody>
+                        <tbody class="search-data"></tbody>
+                        <?php
+                            }
+                            else{
+                        ?>
+                        <tbody class="page-data">
+                            <tr>
+                                <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
+                                    <i class="material-icons">block</i> {{ __('noRecordFound') }}
                                 </td>
-                                <!--PageComponentEnd-->
-                                <td class="td-btn">
-                                    <div class="dropdown" >
-                                        <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
-                                        <i class="material-icons">menu</i> 
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <a class="dropdown-item "   href="<?php print_link("ledgers/view/$rec_id"); ?>" >
-                                            <i class="material-icons">visibility</i> {{ __('view') }}
-                                        </a>
-                                        <a class="dropdown-item "   href="<?php print_link("ledgers/edit/$rec_id"); ?>" >
-                                        <i class="material-icons">edit</i> {{ __('edit') }}
-                                    </a>
-                                    <a class="dropdown-item record-delete-btn" data-prompt-msg="{{ __('promptDeleteRecord') }}" data-display-style="modal" href="<?php print_link("ledgers/delete/$rec_id"); ?>" >
-                                    <i class="material-icons">delete_sweep</i> {{ __('delete') }}
-                                </a>
-                            </ul>
+                            </tr>
+                        </tbody>
+                        <?php
+                            }
+                        ?>
+                    </table>
+                </div>
+                <?php
+                    if($show_footer){
+                ?>
+                <div class=" mt-3">
+                    <div class="row align-items-center justify-content-between">    
+                        <div class="col-md-auto justify-content-center">    
+                            <div class="d-flex justify-content-start">  
+                                <button data-prompt-msg="{{ __('promptDeleteRecords') }}" data-display-style="modal" data-url="<?php print_link("ledgers/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
+                                <i class="material-icons">delete_sweep</i> {{ __('deleteSelected') }}
+                                </button>
+                            </div>
                         </div>
-                    </td>
-                </tr>
-                <?php 
+                        <div class="col">   
+                            <?php
+                                if($show_pagination == true){
+                                $pager = new Pagination($total_records, $record_count);
+                                $pager->show_page_count = false;
+                                $pager->show_record_count = true;
+                                $pager->show_page_limit =false;
+                                $pager->limit = $limit;
+                                $pager->show_page_number_list = true;
+                                $pager->pager_link_range=5;
+                                $pager->render();
+                                }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <?php
                     }
                 ?>
-                <!--endrecord-->
-            </tbody>
-            <tbody class="search-data"></tbody>
-            <?php
-                }
-                else{
-            ?>
-            <tbody class="page-data">
-                <tr>
-                    <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
-                        <i class="material-icons">block</i> {{ __('noRecordFound') }}
-                    </td>
-                </tr>
-            </tbody>
-            <?php
-                }
-            ?>
-        </table>
-    </div>
-    <?php
-        if($show_footer){
-    ?>
-    <div class=" mt-3">
-        <div class="row align-items-center justify-content-between">    
-            <div class="col-md-auto justify-content-center">    
-                <div class="d-flex justify-content-start">  
-                    <button data-prompt-msg="{{ __('promptDeleteRecords') }}" data-display-style="modal" data-url="<?php print_link("ledgers/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
-                    <i class="material-icons">delete_sweep</i> {{ __('deleteSelected') }}
-                    </button>
+            </div>
+            <!-- Detail Page Column -->
+            <?php if(!request()->has('subpage')){ ?>
+            <div class="col-12">
+                <div class=" ">
+                    <div id="ledgers-detail-page" class="master-detail-page"></div>
                 </div>
             </div>
-            <div class="col">   
-                <?php
-                    if($show_pagination == true){
-                    $pager = new Pagination($total_records, $record_count);
-                    $pager->show_page_count = false;
-                    $pager->show_record_count = true;
-                    $pager->show_page_limit =false;
-                    $pager->limit = $limit;
-                    $pager->show_page_number_list = true;
-                    $pager->pager_link_range=5;
-                    $pager->render();
-                    }
-                ?>
-            </div>
+            <?php } ?>
         </div>
     </div>
-    <?php
-        }
-    ?>
-</div>
-<!-- Detail Page Column -->
-<?php if(!request()->has('subpage')){ ?>
-<div class="col-12">
-    <div class=" ">
-        <div id="ledgers-detail-page" class="master-detail-page"></div>
-    </div>
-</div>
-<?php } ?>
-</div>
-</div>
 </div>
 </div>
 </div>

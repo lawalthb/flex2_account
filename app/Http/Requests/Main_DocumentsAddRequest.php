@@ -25,9 +25,9 @@ class Main_DocumentsAddRequest extends FormRequest
 		
         return [
             
-				"name" => "required|string",
 				"affect_account" => "required",
-				"total_amount" => "required|numeric",
+				"name" => "required|string",
+				"total_amount" => "required",
 				"company_id" => "required",
             
         ];

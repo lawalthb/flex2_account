@@ -27,13 +27,12 @@ class Invoice_DocumentsAddRequest extends FormRequest
             
 				"doc_date" => "required|date",
 				"doc_no" => "nullable|string",
-				"comment" => "required",
+				"comment" => "nullable",
 				"doc_type" => "required",
-				"user_id" => "required",
-				"company_id" => "required",
-				"status" => "required|numeric",
 				"customer_legder_id" => "required",
+				"user_id" => "required",
 				"sales_ledger_id" => "required",
+				"company_id" => "required",
             
         ];
     }

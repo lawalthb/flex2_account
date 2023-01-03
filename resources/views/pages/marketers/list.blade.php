@@ -60,15 +60,10 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <table class="table table-hover table-striped table-sm text-left">
                                 <thead class="table-header ">
                                     <tr>
-                                        <th class="td-checkbox">
-                                        <label class="form-check-label">
-                                        <input class="toggle-check-all form-check-input" type="checkbox" />
-                                        </label>
-                                        </th>
                                         <th class="td-id" > {{ __('id') }}</th>
-                                        <th class="td-company_id" > {{ __('companyId') }}</th>
+                                        <th class="td-company_id" > {{ __('company') }}</th>
                                         <th class="td-name" > {{ __('name') }}</th>
-                                        <th class="td-user_id" > {{ __('userId') }}</th>
+                                        <th class="td-user_id" > {{ __('createdBy') }}</th>
                                         <th class="td-is_active" > {{ __('isActive') }}</th>
                                         <th class="td-btn"></th>
                                     </tr>
@@ -85,18 +80,13 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         $counter++;
                                     ?>
                                     <tr>
-                                        <td class=" td-checkbox">
-                                            <label class="form-check-label">
-                                            <input class="optioncheck form-check-input" name="optioncheck[]" value="<?php echo $data['id'] ?>" type="checkbox" />
-                                            </label>
-                                        </td>
                                         <!--PageComponentStart-->
                                         <td class="td-id">
                                             <a href="<?php print_link("marketers/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
                                         </td>
                                         <td class="td-company_id">
                                             <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("companies/view/$data[company_id]?subpage=1") ?>">
-                                            <i class="material-icons">visibility</i> <?php echo "Companies" ?>
+                                            <?php echo $data['companies_name'] ?>
                                         </a>
                                     </td>
                                     <td class="td-name">
@@ -104,7 +94,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </td>
                                     <td class="td-user_id">
                                         <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[user_id]?subpage=1") ?>">
-                                        <i class="material-icons">visibility</i> <?php echo "Users" ?>
+                                        <?php echo $data['users_username'] ?>
                                     </a>
                                 </td>
                                 <td class="td-is_active">

@@ -135,14 +135,14 @@ class Sub_Account_Group extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"company_id",
 			"account_group_id",
 			"name",
 			"code",
 			"description",
 			"total_amount",
-			"user_id" 
+			"user_id",
+			"id" 
 		];
 	}
 }

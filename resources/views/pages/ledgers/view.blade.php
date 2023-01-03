@@ -168,18 +168,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <div class="bg-light mb-3 card-1 p-2 border rounded">
                                             <div class="row align-items-center">
                                                 <div class="col">
-                                                    <small class="text-muted">{{ __('openingBalance') }}</small>
-                                                    <div class="fw-bold">
-                                                        <?php echo  $data['opening_balance'] ; ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class=" col-12 col-md-4">
-                                        <div class="bg-light mb-3 card-1 p-2 border rounded">
-                                            <div class="row align-items-center">
-                                                <div class="col">
                                                     <small class="text-muted">{{ __('isActive') }}</small>
                                                     <div class="fw-bold">
                                                         <?php echo  $data['is_active'] ; ?>
@@ -209,6 +197,30 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 <small class="text-muted">{{ __('regDate') }}</small>
                                                 <div class="fw-bold">
                                                     <?php echo  $data['reg_date'] ; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-12 col-md-4">
+                                    <div class="bg-light mb-3 card-1 p-2 border rounded">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <small class="text-muted">{{ __('creditAmount') }}</small>
+                                                <div class="fw-bold">
+                                                    <?php echo  $data['credit_amount'] ; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-12 col-md-4">
+                                    <div class="bg-light mb-3 card-1 p-2 border rounded">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <small class="text-muted">{{ __('debitAmount') }}</small>
+                                                <div class="fw-bold">
+                                                    <?php echo  $data['debit_amount'] ; ?>
                                                 </div>
                                             </div>
                                         </div>

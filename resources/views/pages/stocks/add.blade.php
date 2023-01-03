@@ -216,7 +216,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 <select required=""  id="ctrl-ledger_id" data-field="ledger_id" name="ledger_id"  placeholder="{{ __('selectAValue') }}"    class="form-select" >
                                                 <option value="">{{ __('selectAValue') }}</option>
                                                 <?php 
-                                                    $options = $comp_model->customer_legder_id_option_list() ?? [];
+                                                    $options = $comp_model->ledger_id_option_list() ?? [];
                                                     foreach($options as $option){
                                                     $value = $option->value;
                                                     $label = $option->label ?? $value;

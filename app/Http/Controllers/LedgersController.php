@@ -28,6 +28,7 @@ class LedgersController extends Controller
 		$orderby = $request->orderby ?? "ledgers.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
+		$query->where("company_id", "=" , auth()->user()->company_id);
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
 		}

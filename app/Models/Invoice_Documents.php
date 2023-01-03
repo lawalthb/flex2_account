@@ -28,7 +28,7 @@ class Invoice_Documents extends Model
      * @var array
      */
 	protected $fillable = [
-		'doc_date','doc_no','comment','doc_type','user_id','company_id','status','customer_legder_id','sales_ledger_id'
+		'doc_date','doc_no','comment','doc_type','customer_legder_id','user_id','sales_ledger_id','company_id','status'
 	];
 	public $timestamps = false;
 	
@@ -143,16 +143,16 @@ class Invoice_Documents extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"doc_date",
 			"doc_no",
 			"comment",
 			"doc_type",
+			"customer_legder_id",
 			"user_id",
+			"sales_ledger_id",
 			"company_id",
 			"status",
-			"customer_legder_id",
-			"sales_ledger_id" 
+			"id" 
 		];
 	}
 }

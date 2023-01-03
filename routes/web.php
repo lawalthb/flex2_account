@@ -255,27 +255,27 @@ Route::get('componentsdata/doc_type_option_list',  function(Request $request){
 	}
 )->middleware(['auth']);
 	
-Route::get('componentsdata/user_id_option_list',  function(Request $request){
-		$compModel = new App\Models\ComponentsData();
-		return $compModel->user_id_option_list($request);
-	}
-)->middleware(['auth']);
-	
-Route::get('componentsdata/company_id_option_list',  function(Request $request){
-		$compModel = new App\Models\ComponentsData();
-		return $compModel->company_id_option_list($request);
-	}
-)->middleware(['auth']);
-	
 Route::get('componentsdata/customer_legder_id_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
 		return $compModel->customer_legder_id_option_list($request);
 	}
 )->middleware(['auth']);
 	
+Route::get('componentsdata/user_id_option_list',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->user_id_option_list($request);
+	}
+)->middleware(['auth']);
+	
 Route::get('componentsdata/sales_ledger_id_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
 		return $compModel->sales_ledger_id_option_list($request);
+	}
+)->middleware(['auth']);
+	
+Route::get('componentsdata/company_id_option_list',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->company_id_option_list($request);
 	}
 )->middleware(['auth']);
 	
@@ -288,6 +288,12 @@ Route::get('componentsdata/product_id_option_list',  function(Request $request){
 Route::get('componentsdata/doc_id_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
 		return $compModel->doc_id_option_list($request);
+	}
+)->middleware(['auth']);
+	
+Route::get('componentsdata/marketer_id_option_list',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->marketer_id_option_list($request);
 	}
 )->middleware(['auth']);
 	
@@ -312,6 +318,18 @@ Route::get('componentsdata/unit_option_list',  function(Request $request){
 Route::get('componentsdata/document_type_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
 		return $compModel->document_type_option_list($request);
+	}
+)->middleware(['auth']);
+	
+Route::get('componentsdata/ledger_id_option_list',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->ledger_id_option_list($request);
+	}
+)->middleware(['auth']);
+	
+Route::get('componentsdata/account_group_id_option_list',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->account_group_id_option_list($request);
 	}
 )->middleware(['auth']);
 	

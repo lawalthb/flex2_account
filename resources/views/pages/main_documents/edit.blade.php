@@ -47,18 +47,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="control-label" for="name">{{ __('name') }} <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-name-holder" class=" ">
-                                            <input id="ctrl-name" data-field="name"  value="<?php  echo $data['name']; ?>" type="text" placeholder="{{ __('enterName') }}"  required="" name="name"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
                                         <label class="control-label" for="affect_account">{{ __('affectAccount') }} <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-sm-8">
@@ -86,42 +74,29 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="control-label" for="total_amount">{{ __('totalAmount') }} <span class="text-danger">*</span></label>
+                                        <label class="control-label" for="name">{{ __('name') }} <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-sm-8">
-                                        <div id="ctrl-total_amount-holder" class=" ">
-                                            <input id="ctrl-total_amount" data-field="total_amount"  value="<?php  echo $data['total_amount']; ?>" type="number" placeholder="{{ __('enterTotalAmount') }}" step="0.1"  required="" name="total_amount"  class="form-control " />
+                                        <div id="ctrl-name-holder" class=" ">
+                                            <input id="ctrl-name" data-field="name"  value="<?php  echo $data['name']; ?>" type="text" placeholder="{{ __('enterName') }}"  required="" name="name"  class="form-control " />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="company_id">{{ __('companyId') }} <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-company_id-holder" class=" ">
-                                            <select required=""  id="ctrl-company_id" data-field="company_id" name="company_id"  placeholder="{{ __('selectAValue') }}"    class="form-select" >
-                                            <option value="">{{ __('selectAValue') }}</option>
-                                            <?php
-                                                $options = $comp_model->company_id_option_list() ?? [];
-                                                foreach($options as $option){
-                                                $value = $option->value;
-                                                $label = $option->label ?? $value;
-                                                $selected = ( $value == $data['company_id'] ? 'selected' : null );
-                                            ?>
-                                            <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                            <?php echo $label; ?>
-                                            </option>
-                                            <?php
-                                                }
-                                            ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <input id="ctrl-total_amount" data-field="total_amount"  value="<?php  echo $data['total_amount']; ?>" type="hidden" placeholder="{{ __('enterTotalAmount') }}"  required="" name="total_amount"  class="form-control " />
+                            <input id="ctrl-company_id" data-field="company_id"  value="<?php  echo $data['company_id']; ?>" type="hidden" placeholder="{{ __('enterCompanyId') }}" list="company_id_list"  required="" name="company_id"  class="form-control " />
+                            <datalist id="company_id_list">
+                            <?php
+                                $options = $comp_model->company_id_option_list() ?? [];
+                                foreach($options as $option){
+                                $value = $option->value;
+                                $label = $option->label ?? $value;
+                            ?>
+                            <option value="<?php echo $value; ?>"><?php echo $label; ?></option>
+                            <?php
+                                }
+                            ?>
+                            </datalist>
                         </div>
                         <div class="form-ajax-status"></div>
                         <!--[form-content-end]-->

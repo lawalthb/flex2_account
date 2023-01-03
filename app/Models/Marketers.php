@@ -41,7 +41,7 @@ class Marketers extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				name LIKE ? 
+				marketers.name LIKE ? 
 		)';
 		$search_params = [
 			"%$text%"
@@ -58,11 +58,13 @@ class Marketers extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"company_id",
-			"name",
-			"user_id",
-			"is_active" 
+			"marketers.id AS id",
+			"marketers.company_id AS company_id",
+			"companies.name AS companies_name",
+			"marketers.name AS name",
+			"marketers.user_id AS user_id",
+			"users.username AS users_username",
+			"marketers.is_active AS is_active" 
 		];
 	}
 	
@@ -74,11 +76,13 @@ class Marketers extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"company_id",
-			"name",
-			"user_id",
-			"is_active" 
+			"marketers.id AS id",
+			"marketers.company_id AS company_id",
+			"companies.name AS companies_name",
+			"marketers.name AS name",
+			"marketers.user_id AS user_id",
+			"users.username AS users_username",
+			"marketers.is_active AS is_active" 
 		];
 	}
 	
@@ -122,11 +126,9 @@ class Marketers extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
-			"company_id",
 			"name",
-			"user_id",
-			"is_active" 
+			"is_active",
+			"id" 
 		];
 	}
 }

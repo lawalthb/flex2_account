@@ -58,7 +58,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                         <div class="row gutter-lg ">
                             <div class="col">
                                 <div id="page-main-content" class="table-responsive">
-                                    <?php Html::page_bread_crumb("/main_documents/", $field_name, $field_value); ?>
                                     <table class="table table-hover table-striped table-sm text-left">
                                         <thead class="table-header ">
                                             <tr>
@@ -69,9 +68,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 </th>
                                                 <th class="td-" > </th><th class="td-id" > {{ __('id') }}</th>
                                                 <th class="td-name" > {{ __('name') }}</th>
-                                                <th class="td-affect_account" > {{ __('affectAccount') }}</th>
-                                                <th class="td-total_amount" > {{ __('totalAmount') }}</th>
-                                                <th class="td-company_id" > {{ __('companyId') }}</th>
+                                                <th class="td-name" > {{ __('companiesName') }}</th>
                                                 <th class="td-btn"></th>
                                             </tr>
                                         </thead>
@@ -104,103 +101,86 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             <td class="td-name">
                                                 <?php echo  $data['name'] ; ?>
                                             </td>
-                                            <td class="td-affect_account">
-                                                <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("account_groups/view/$data[affect_account]?subpage=1") ?>">
-                                                <i class="material-icons">visibility</i> <?php echo "Account Groups" ?>
-                                            </a>
-                                        </td>
-                                        <td class="td-total_amount">
-                                            <?php echo  $data['total_amount'] ; ?>
-                                        </td>
-                                        <td class="td-company_id">
-                                            <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("companies/view/$data[company_id]?subpage=1") ?>">
-                                            <i class="material-icons">visibility</i> <?php echo "Companies" ?>
-                                        </a>
-                                    </td>
-                                    <!--PageComponentEnd-->
-                                    <td class="td-btn">
-                                        <div class="dropdown" >
-                                            <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
-                                            <i class="material-icons">menu</i> 
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <a class="dropdown-item "   href="<?php print_link("main_documents/view/$rec_id"); ?>" >
+                                            <td class="td-companies_name">
+                                                <?php echo  $data['companies_name'] ; ?>
+                                            </td>
+                                            <!--PageComponentEnd-->
+                                            <td class="td-btn">
+                                                <a class="btn btn-sm btn-primary has-tooltip "    href="<?php print_link("main_documents/view/$rec_id"); ?>" >
                                                 <i class="material-icons">visibility</i> {{ __('view') }}
                                             </a>
-                                            <a class="dropdown-item "   href="<?php print_link("main_documents/edit/$rec_id"); ?>" >
+                                            <a class="btn btn-sm btn-success has-tooltip "    href="<?php print_link("main_documents/edit/$rec_id"); ?>" >
                                             <i class="material-icons">edit</i> {{ __('edit') }}
                                         </a>
-                                        <a class="dropdown-item record-delete-btn" data-prompt-msg="{{ __('promptDeleteRecord') }}" data-display-style="modal" href="<?php print_link("main_documents/delete/$rec_id"); ?>" >
+                                        <a class="btn btn-sm btn-danger has-tooltip record-delete-btn" data-prompt-msg="{{ __('promptDeleteRecord') }}" data-display-style="modal"  href="<?php print_link("main_documents/delete/$rec_id"); ?>" >
                                         <i class="material-icons">delete_sweep</i> {{ __('delete') }}
                                     </a>
-                                </ul>
+                                </td>
+                            </tr>
+                            <?php 
+                                }
+                            ?>
+                            <!--endrecord-->
+                        </tbody>
+                        <tbody class="search-data"></tbody>
+                        <?php
+                            }
+                            else{
+                        ?>
+                        <tbody class="page-data">
+                            <tr>
+                                <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
+                                    <i class="material-icons">block</i> {{ __('noRecordFound') }}
+                                </td>
+                            </tr>
+                        </tbody>
+                        <?php
+                            }
+                        ?>
+                    </table>
+                </div>
+                <?php
+                    if($show_footer){
+                ?>
+                <div class=" mt-3">
+                    <div class="row align-items-center justify-content-between">    
+                        <div class="col-md-auto justify-content-center">    
+                            <div class="d-flex justify-content-start">  
+                                <button data-prompt-msg="{{ __('promptDeleteRecords') }}" data-display-style="modal" data-url="<?php print_link("main_documents/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
+                                <i class="material-icons">delete_sweep</i> {{ __('deleteSelected') }}
+                                </button>
                             </div>
-                        </td>
-                    </tr>
-                    <?php 
-                        }
-                    ?>
-                    <!--endrecord-->
-                </tbody>
-                <tbody class="search-data"></tbody>
-                <?php
-                    }
-                    else{
-                ?>
-                <tbody class="page-data">
-                    <tr>
-                        <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
-                            <i class="material-icons">block</i> {{ __('noRecordFound') }}
-                        </td>
-                    </tr>
-                </tbody>
-                <?php
-                    }
-                ?>
-            </table>
-        </div>
-        <?php
-            if($show_footer){
-        ?>
-        <div class=" mt-3">
-            <div class="row align-items-center justify-content-between">    
-                <div class="col-md-auto justify-content-center">    
-                    <div class="d-flex justify-content-start">  
-                        <button data-prompt-msg="{{ __('promptDeleteRecords') }}" data-display-style="modal" data-url="<?php print_link("main_documents/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
-                        <i class="material-icons">delete_sweep</i> {{ __('deleteSelected') }}
-                        </button>
+                        </div>
+                        <div class="col">   
+                            <?php
+                                if($show_pagination == true){
+                                $pager = new Pagination($total_records, $record_count);
+                                $pager->show_page_count = false;
+                                $pager->show_record_count = true;
+                                $pager->show_page_limit =false;
+                                $pager->limit = $limit;
+                                $pager->show_page_number_list = true;
+                                $pager->pager_link_range=5;
+                                $pager->render();
+                                }
+                            ?>
+                        </div>
                     </div>
                 </div>
-                <div class="col">   
-                    <?php
-                        if($show_pagination == true){
-                        $pager = new Pagination($total_records, $record_count);
-                        $pager->show_page_count = false;
-                        $pager->show_record_count = true;
-                        $pager->show_page_limit =false;
-                        $pager->limit = $limit;
-                        $pager->show_page_number_list = true;
-                        $pager->pager_link_range=5;
-                        $pager->render();
-                        }
-                    ?>
+                <?php
+                    }
+                ?>
+            </div>
+            <!-- Detail Page Column -->
+            <?php if(!request()->has('subpage')){ ?>
+            <div class="col-12">
+                <div class=" ">
+                    <div id="main_documents-detail-page" class="master-detail-page"></div>
                 </div>
             </div>
-        </div>
-        <?php
-            }
-        ?>
-    </div>
-    <!-- Detail Page Column -->
-    <?php if(!request()->has('subpage')){ ?>
-    <div class="col-12">
-        <div class=" ">
-            <div id="main_documents-detail-page" class="master-detail-page"></div>
+            <?php } ?>
         </div>
     </div>
-    <?php } ?>
-</div>
-</div>
 </div>
 </div>
 </div>

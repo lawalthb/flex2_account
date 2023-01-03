@@ -176,6 +176,7 @@ class Products extends Model
      */
 	public static function copmProductsFields(){
 		return [ 
+			"products.id AS id",
 			"products.name AS name",
 			"products.category AS category",
 			"product_categories.name AS product_categories_name",
@@ -183,9 +184,9 @@ class Products extends Model
 			"products.selling_price AS selling_price",
 			"products.purchase_price AS purchase_price",
 			"products.user_id AS user_id",
+			"users.username AS users_username",
 			"products.unit AS unit",
-			"products.company_id AS company_id",
-			"products.id AS id" 
+			"units.name AS units_name" 
 		];
 	}
 	
@@ -197,6 +198,7 @@ class Products extends Model
      */
 	public static function exportCopmProductsFields(){
 		return [ 
+			"products.id AS id",
 			"products.name AS name",
 			"products.category AS category",
 			"product_categories.name AS product_categories_name",
@@ -204,9 +206,9 @@ class Products extends Model
 			"products.selling_price AS selling_price",
 			"products.purchase_price AS purchase_price",
 			"products.user_id AS user_id",
+			"users.username AS users_username",
 			"products.unit AS unit",
-			"products.company_id AS company_id",
-			"products.id AS id" 
+			"units.name AS units_name" 
 		];
 	}
 }

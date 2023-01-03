@@ -25,9 +25,11 @@ class Main_DocumentsController extends Controller
 			$search = trim($request->search);
 			Main_Documents::search($query, $search); // search table records
 		}
+		$query->join("companies", "main_documents.company_id", "=", "companies.id");
 		$orderby = $request->orderby ?? "main_documents.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
+		$query->where("company_id", "=" , auth()->user()->company_id);
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
 		}
@@ -43,6 +45,7 @@ class Main_DocumentsController extends Controller
      */
 	function view($rec_id = null){
 		$query = Main_Documents::query();
+		$query->join("companies", "main_documents.company_id", "=", "companies.id");
 		$record = $query->findOrFail($rec_id, Main_Documents::viewFields());
 		return $this->renderView("pages.main_documents.view", ["data" => $record]);
 	}

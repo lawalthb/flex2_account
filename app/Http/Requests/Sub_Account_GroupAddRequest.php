@@ -28,10 +28,10 @@ class Sub_Account_GroupAddRequest extends FormRequest
 				"company_id" => "required",
 				"account_group_id" => "required",
 				"name" => "required|string",
-				"code" => "required|numeric",
-				"description" => "nullable",
-				"total_amount" => "required|numeric",
-				"user_id" => "required|numeric",
+				"code" => "required",
+				"description" => "nullable|string",
+				"total_amount" => "nullable",
+				"user_id" => "required",
             
         ];
     }

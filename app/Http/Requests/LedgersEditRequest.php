@@ -28,14 +28,15 @@ class LedgersEditRequest extends FormRequest
 				"company_id" => "filled",
 				"sub_account_group_id" => "filled",
 				"ledger_name" => "filled|string",
-				"marketer_id" => "filled|numeric",
+				"marketer_id" => "filled",
 				"address" => "nullable",
 				"email" => "nullable|email",
 				"phone" => "nullable|string",
 				"contact_person" => "nullable|string",
-				"opening_balance" => "filled|numeric",
-				"is_active" => "filled|string",
+				"is_active" => "filled",
 				"user_id" => "filled",
+				"credit_amount" => "filled|numeric",
+				"debit_amount" => "filled|numeric",
             
         ];
     }

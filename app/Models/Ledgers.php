@@ -28,7 +28,7 @@ class Ledgers extends Model
      * @var array
      */
 	protected $fillable = [
-		'company_id','sub_account_group_id','ledger_name','marketer_id','address','email','phone','contact_person','opening_balance','is_active','user_id'
+		'company_id','sub_account_group_id','ledger_name','marketer_id','address','email','phone','contact_person','is_active','user_id','credit_amount','debit_amount'
 	];
 	public $timestamps = false;
 	
@@ -63,18 +63,13 @@ class Ledgers extends Model
 	public static function listFields(){
 		return [ 
 			"id",
-			"company_id",
-			"sub_account_group_id",
 			"ledger_name",
-			"marketer_id",
 			"address",
 			"email",
-			"phone",
 			"contact_person",
-			"opening_balance",
-			"is_active",
-			"user_id",
-			"reg_date" 
+			"credit_amount",
+			"debit_amount",
+			"is_active" 
 		];
 	}
 	
@@ -87,18 +82,13 @@ class Ledgers extends Model
 	public static function exportListFields(){
 		return [ 
 			"id",
-			"company_id",
-			"sub_account_group_id",
 			"ledger_name",
-			"marketer_id",
 			"address",
 			"email",
-			"phone",
 			"contact_person",
-			"opening_balance",
-			"is_active",
-			"user_id",
-			"reg_date" 
+			"credit_amount",
+			"debit_amount",
+			"is_active" 
 		];
 	}
 	
@@ -119,10 +109,11 @@ class Ledgers extends Model
 			"email",
 			"phone",
 			"contact_person",
-			"opening_balance",
 			"is_active",
 			"user_id",
-			"reg_date" 
+			"reg_date",
+			"credit_amount",
+			"debit_amount" 
 		];
 	}
 	
@@ -143,10 +134,11 @@ class Ledgers extends Model
 			"email",
 			"phone",
 			"contact_person",
-			"opening_balance",
 			"is_active",
 			"user_id",
-			"reg_date" 
+			"reg_date",
+			"credit_amount",
+			"debit_amount" 
 		];
 	}
 	
@@ -158,7 +150,6 @@ class Ledgers extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"company_id",
 			"sub_account_group_id",
 			"ledger_name",
@@ -167,9 +158,11 @@ class Ledgers extends Model
 			"email",
 			"phone",
 			"contact_person",
-			"opening_balance",
 			"is_active",
-			"user_id" 
+			"user_id",
+			"credit_amount",
+			"debit_amount",
+			"id" 
 		];
 	}
 }

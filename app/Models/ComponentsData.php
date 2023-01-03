@@ -40,6 +40,19 @@ class ComponentsData{
 	
 
 	/**
+     * customer_legder_id_option_list Model Action
+     * @return array
+     */
+	function customer_legder_id_option_list(){
+		$sqltext = "SELECT id as value, ledger_name as label FROM ledgers WHERE company_id=:compid" ;
+		$query_params = [];
+$query_params['compid'] = auth()->user()->company_id;
+		$arr = DB::select(DB::raw($sqltext), $query_params);
+		return $arr;
+	}
+	
+
+	/**
      * user_id_option_list Model Action
      * @return array
      */
@@ -52,35 +65,24 @@ class ComponentsData{
 	
 
 	/**
+     * sales_ledger_id_option_list Model Action
+     * @return array
+     */
+	function sales_ledger_id_option_list(){
+		$sqltext = "SELECT id as value, name as label FROM sub_account_group WHERE company_id=:compid" ;
+		$query_params = [];
+$query_params['compid'] = auth()->user()->company_id;
+		$arr = DB::select(DB::raw($sqltext), $query_params);
+		return $arr;
+	}
+	
+
+	/**
      * company_id_option_list Model Action
      * @return array
      */
 	function company_id_option_list(){
 		$sqltext = "SELECT id as value, name as label FROM companies";
-		$query_params = [];
-		$arr = DB::select(DB::raw($sqltext), $query_params);
-		return $arr;
-	}
-	
-
-	/**
-     * customer_legder_id_option_list Model Action
-     * @return array
-     */
-	function customer_legder_id_option_list(){
-		$sqltext = "SELECT id as value, ledger_name as label FROM ledgers";
-		$query_params = [];
-		$arr = DB::select(DB::raw($sqltext), $query_params);
-		return $arr;
-	}
-	
-
-	/**
-     * sales_ledger_id_option_list Model Action
-     * @return array
-     */
-	function sales_ledger_id_option_list(){
-		$sqltext = "SELECT id as value, name as label FROM sub_account_group";
 		$query_params = [];
 		$arr = DB::select(DB::raw($sqltext), $query_params);
 		return $arr;
@@ -112,12 +114,26 @@ class ComponentsData{
 	
 
 	/**
+     * marketer_id_option_list Model Action
+     * @return array
+     */
+	function marketer_id_option_list(){
+		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM marketers WHERE company_id=:compid ORDER BY name ASC" ;
+		$query_params = [];
+$query_params['compid'] = auth()->user()->company_id;
+		$arr = DB::select(DB::raw($sqltext), $query_params);
+		return $arr;
+	}
+	
+
+	/**
      * affect_account_option_list Model Action
      * @return array
      */
 	function affect_account_option_list(){
-		$sqltext = "SELECT id as value, name as label FROM account_groups";
+		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM sub_account_group WHERE company_id=:compid" ;
 		$query_params = [];
+$query_params['compid'] = auth()->user()->company_id;
 		$arr = DB::select(DB::raw($sqltext), $query_params);
 		return $arr;
 	}
@@ -154,6 +170,30 @@ $query_params['comID'] = auth()->user()->company_id;
      */
 	function document_type_option_list(){
 		$sqltext = "SELECT id as value, name as label FROM main_documents";
+		$query_params = [];
+		$arr = DB::select(DB::raw($sqltext), $query_params);
+		return $arr;
+	}
+	
+
+	/**
+     * ledger_id_option_list Model Action
+     * @return array
+     */
+	function ledger_id_option_list(){
+		$sqltext = "SELECT id as value, ledger_name as label FROM ledgers";
+		$query_params = [];
+		$arr = DB::select(DB::raw($sqltext), $query_params);
+		return $arr;
+	}
+	
+
+	/**
+     * account_group_id_option_list Model Action
+     * @return array
+     */
+	function account_group_id_option_list(){
+		$sqltext = "SELECT id as value, name as label FROM account_groups ";
 		$query_params = [];
 		$arr = DB::select(DB::raw($sqltext), $query_params);
 		return $arr;

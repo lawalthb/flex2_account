@@ -25,9 +25,9 @@ class Main_DocumentsEditRequest extends FormRequest
 		
         return [
             
-				"name" => "filled|string",
 				"affect_account" => "filled",
-				"total_amount" => "filled|numeric",
+				"name" => "filled|string",
+				"total_amount" => "filled",
 				"company_id" => "filled",
             
         ];

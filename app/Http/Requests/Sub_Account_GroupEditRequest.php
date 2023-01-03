@@ -28,10 +28,10 @@ class Sub_Account_GroupEditRequest extends FormRequest
 				"company_id" => "filled",
 				"account_group_id" => "filled",
 				"name" => "filled|string",
-				"code" => "filled|numeric",
-				"description" => "nullable",
-				"total_amount" => "filled|numeric",
-				"user_id" => "filled|numeric",
+				"code" => "filled",
+				"description" => "nullable|string",
+				"total_amount" => "nullable",
+				"user_id" => "filled",
             
         ];
     }

@@ -25,10 +25,8 @@ class MarketersEditRequest extends FormRequest
 		
         return [
             
-				"company_id" => "filled",
 				"name" => "filled|string",
-				"user_id" => "filled",
-				"is_active" => "filled|string",
+				"is_active" => "filled",
             
         ];
     }

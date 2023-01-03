@@ -28,14 +28,15 @@ class LedgersAddRequest extends FormRequest
 				"company_id" => "required",
 				"sub_account_group_id" => "required",
 				"ledger_name" => "required|string",
-				"marketer_id" => "required|numeric",
+				"marketer_id" => "required",
 				"address" => "nullable",
 				"email" => "nullable|email",
 				"phone" => "nullable|string",
 				"contact_person" => "nullable|string",
-				"opening_balance" => "required|numeric",
-				"is_active" => "required|string",
+				"is_active" => "required",
 				"user_id" => "required",
+				"credit_amount" => "required|numeric",
+				"debit_amount" => "required|numeric",
             
         ];
     }

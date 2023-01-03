@@ -28,7 +28,7 @@ class Main_Documents extends Model
      * @var array
      */
 	protected $fillable = [
-		'name','affect_account','total_amount','company_id'
+		'affect_account','name','total_amount','company_id'
 	];
 	public $timestamps = false;
 	
@@ -41,10 +41,19 @@ class Main_Documents extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				name LIKE ? 
+				main_documents.name LIKE ?  OR 
+				companies.name LIKE ?  OR 
+				companies.address LIKE ?  OR 
+				companies.logo LIKE ?  OR 
+				companies.website LIKE ?  OR 
+				companies.favicon LIKE ?  OR 
+				companies.com_email LIKE ?  OR 
+				companies.com_phone LIKE ?  OR 
+				companies.signature LIKE ?  OR 
+				companies.slogan LIKE ? 
 		)';
 		$search_params = [
-			"%$text%"
+			"%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%"
 		];
 		//setting search conditions
 		$query->whereRaw($search_condition, $search_params);
@@ -58,11 +67,10 @@ class Main_Documents extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"name",
-			"affect_account",
-			"total_amount",
-			"company_id" 
+			"main_documents.id AS id",
+			"main_documents.name AS name",
+			"companies.id AS companies_id",
+			"companies.name AS companies_name" 
 		];
 	}
 	
@@ -74,11 +82,10 @@ class Main_Documents extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"name",
-			"affect_account",
-			"total_amount",
-			"company_id" 
+			"main_documents.id AS id",
+			"main_documents.name AS name",
+			"companies.id AS companies_id",
+			"companies.name AS companies_name" 
 		];
 	}
 	
@@ -90,11 +97,21 @@ class Main_Documents extends Model
      */
 	public static function viewFields(){
 		return [ 
-			"id",
-			"name",
-			"affect_account",
-			"total_amount",
-			"company_id" 
+			"main_documents.id AS id",
+			"main_documents.name AS name",
+			"main_documents.affect_account AS affect_account",
+			"main_documents.total_amount AS total_amount",
+			"main_documents.company_id AS company_id",
+			"companies.id AS companies_id",
+			"companies.name AS companies_name",
+			"companies.address AS companies_address",
+			"companies.logo AS companies_logo",
+			"companies.website AS companies_website",
+			"companies.favicon AS companies_favicon",
+			"companies.com_email AS companies_com_email",
+			"companies.com_phone AS companies_com_phone",
+			"companies.signature AS companies_signature",
+			"companies.slogan AS companies_slogan" 
 		];
 	}
 	
@@ -106,11 +123,21 @@ class Main_Documents extends Model
      */
 	public static function exportViewFields(){
 		return [ 
-			"id",
-			"name",
-			"affect_account",
-			"total_amount",
-			"company_id" 
+			"main_documents.id AS id",
+			"main_documents.name AS name",
+			"main_documents.affect_account AS affect_account",
+			"main_documents.total_amount AS total_amount",
+			"main_documents.company_id AS company_id",
+			"companies.id AS companies_id",
+			"companies.name AS companies_name",
+			"companies.address AS companies_address",
+			"companies.logo AS companies_logo",
+			"companies.website AS companies_website",
+			"companies.favicon AS companies_favicon",
+			"companies.com_email AS companies_com_email",
+			"companies.com_phone AS companies_com_phone",
+			"companies.signature AS companies_signature",
+			"companies.slogan AS companies_slogan" 
 		];
 	}
 	
@@ -122,11 +149,11 @@ class Main_Documents extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
-			"name",
 			"affect_account",
+			"name",
 			"total_amount",
-			"company_id" 
+			"company_id",
+			"id" 
 		];
 	}
 }

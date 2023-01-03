@@ -25,6 +25,8 @@ class MarketersController extends Controller
 			$search = trim($request->search);
 			Marketers::search($query, $search); // search table records
 		}
+		$query->join("companies", "marketers.company_id", "=", "companies.id");
+		$query->join("users", "marketers.user_id", "=", "users.id");
 		$orderby = $request->orderby ?? "marketers.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
@@ -63,6 +65,8 @@ class MarketersController extends Controller
      */
 	function store(MarketersAddRequest $request){
 		$modeldata = $this->normalizeFormData($request->validated());
+		$modeldata['company_id'] = auth()->user()->company_id;
+		$modeldata['user_id'] = auth()->user()->id;
 		
 		//save Marketers record
 		$record = Marketers::create($modeldata);

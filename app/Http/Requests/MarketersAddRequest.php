@@ -25,10 +25,8 @@ class MarketersAddRequest extends FormRequest
 		
         return [
             
-				"company_id" => "required",
 				"name" => "required|string",
-				"user_id" => "required",
-				"is_active" => "required|string",
+				"is_active" => "required",
             
         ];
     }

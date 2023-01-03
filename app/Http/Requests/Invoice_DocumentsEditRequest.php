@@ -27,13 +27,13 @@ class Invoice_DocumentsEditRequest extends FormRequest
             
 				"doc_date" => "filled|date",
 				"doc_no" => "nullable|string",
-				"comment" => "filled",
+				"comment" => "nullable",
 				"doc_type" => "filled",
+				"customer_legder_id" => "filled",
 				"user_id" => "filled",
+				"sales_ledger_id" => "filled",
 				"company_id" => "filled",
 				"status" => "filled|numeric",
-				"customer_legder_id" => "filled",
-				"sales_ledger_id" => "filled",
             
         ];
     }

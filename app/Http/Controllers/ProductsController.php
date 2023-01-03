@@ -147,6 +147,8 @@ class ProductsController extends Controller
 			Products::search($query, $search); // search table records
 		}
 		$query->join("product_categories", "products.category", "=", "product_categories.id");
+		$query->join("users", "products.user_id", "=", "users.id");
+		$query->join("units", "products.unit", "=", "units.id");
 		$orderby = $request->orderby ?? "products.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
